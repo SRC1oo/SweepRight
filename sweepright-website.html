@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SweepRight — Book a trusted, background-checked cleaner anywhere in the UK in 60 seconds. Transparent pricing, same cleaner every visit, easy online booking.">
+<title>SweepRight | Trusted Home Cleaning Across the UK</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1DB8A0;
+  --primary-dark: #13957F;
+  --primary-light: #E6F9F6;
+  --secondary: #0D5C50;
+  --accent: #F4FBF9;
+  --text: #1A2332;
+  --text-mid: #4B5563;
+  --text-light: #9CA3AF;
+  --white: #FFFFFF;
+  --border: #E5E7EB;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+input,textarea,select{font-family:inherit;outline:none}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none;min-height:100vh;padding-top:72px}
+.page.active{display:block}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:72px;display:flex;align-items:center}
+.nav-inner{max-width:1180px;margin:0 auto;width:100%;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-icon{width:36px;height:36px;background:var(--primary);border-radius:9px;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:20px;height:20px;fill:white}
+.logo-text{font-size:1.25rem;font-weight:800;color:var(--text);letter-spacing:-0.02em}
+.logo-text span{color:var(--primary)}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{padding:8px 14px;border-radius:8px;font-size:0.9rem;font-weight:500;color:var(--text-mid);transition:all 0.2s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active{background:var(--primary-light);color:var(--primary-dark)}
+.nav-cta{background:var(--primary);color:white!important;padding:9px 20px!important;border-radius:9px!important;font-weight:600!important;transition:all 0.2s!important}
+.nav-cta:hover{background:var(--primary-dark)!important;transform:translateY(-1px);box-shadow:0 4px 12px rgba(29,184,160,0.3)!important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:white;border-bottom:1px solid var(--border);padding:16px 24px;z-index:999;flex-direction:column;gap:4px;box-shadow:var(--shadow-md)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{padding:12px 16px;border-radius:8px;font-size:0.95rem;font-weight:500;color:var(--text-mid);cursor:pointer}
+.mobile-menu a:hover{background:var(--primary-light);color:var(--primary)}
+
+/* ── UTILITIES ── */
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
+.section-sm{padding:48px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 28px;border-radius:10px;font-size:1rem;font-weight:600;transition:all 0.22s;cursor:pointer;border:none}
+.btn-primary{background:var(--primary);color:white}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(29,184,160,0.35)}
+.btn-outline{background:transparent;color:var(--primary);border:2px solid var(--primary)}
+.btn-outline:hover{background:var(--primary-light);transform:translateY(-2px)}
+.btn-white{background:white;color:var(--primary)}
+.btn-white:hover{background:#f0fdf9;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.15)}
+.btn-lg{padding:16px 36px;font-size:1.08rem;border-radius:12px}
+.tag{display:inline-block;padding:4px 12px;background:var(--primary-light);color:var(--primary-dark);border-radius:20px;font-size:0.8rem;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:12px}
+.text-center{text-align:center}
+h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.15;letter-spacing:-0.03em}
+h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;line-height:1.2;letter-spacing:-0.02em}
+h3{font-size:1.2rem;font-weight:600;line-height:1.3}
+p{color:var(--text-mid)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fade-up{animation:fadeUp 0.6s ease both}
+.delay-1{animation-delay:0.1s}
+.delay-2{animation-delay:0.2s}
+.delay-3{animation-delay:0.3s}
+.delay-4{animation-delay:0.4s}
+
+/* ═══════════════════════════════════
+   HOMEPAGE
+═══════════════════════════════════ */
+.hero{background:linear-gradient(135deg,#f0fdf9 0%,#e6f9f6 50%,#f0fffe 100%);padding:80px 0 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(29,184,160,0.12) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(29,184,160,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-left{}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:white;border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:600;color:var(--primary-dark);margin-bottom:20px;box-shadow:var(--shadow-sm)}
+.hero-badge-dot{width:8px;height:8px;background:var(--primary);border-radius:50%;animation:pulse 2s infinite}
+.hero h1{margin-bottom:20px}
+.hero h1 span{color:var(--primary)}
+.hero-sub{font-size:1.1rem;color:var(--text-mid);margin-bottom:32px;max-width:480px}
+.hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:36px}
+.hero-price-note{font-size:0.88rem;color:var(--text-mid);display:flex;align-items:center;gap:6px}
+.hero-price-note strong{color:var(--primary-dark)}
+.trust-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:0.85rem;font-weight:500;color:var(--text-mid)}
+.trust-icon{width:20px;height:20px;background:var(--primary-light);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trust-icon svg{width:11px;height:11px;stroke:var(--primary-dark)}
+.hero-right{position:relative}
+.hero-card{background:white;border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-lg);animation:float 4s ease-in-out infinite}
+.hero-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.hero-card-title{font-weight:700;font-size:1rem}
+.hero-card-badge{background:var(--primary-light);color:var(--primary-dark);padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:600}
+.booking-mini{display:flex;flex-direction:column;gap:12px}
+.booking-mini-row{display:flex;align-items:center;gap:10px;background:#f9fafb;border-radius:8px;padding:12px 14px}
+.booking-mini-icon{width:32px;height:32px;background:var(--primary-light);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.booking-mini-icon svg{width:16px;height:16px;stroke:var(--primary)}
+.booking-mini-label{font-size:0.78rem;color:var(--text-light)}
+.booking-mini-val{font-size:0.9rem;font-weight:600;color:var(--text)}
+.booking-mini-btn{background:var(--primary);color:white;border-radius:9px;padding:13px;font-weight:700;font-size:0.95rem;text-align:center;cursor:pointer;transition:all 0.2s;margin-top:4px}
+.booking-mini-btn:hover{background:var(--primary-dark)}
+.hero-floating-1{position:absolute;top:-20px;right:-20px;background:white;border-radius:12px;padding:12px 16px;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:10px;font-size:0.82rem;font-weight:600}
+.hero-floating-2{position:absolute;bottom:-16px;left:-16px;background:white;border-radius:12px;padding:12px 16px;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:10px;font-size:0.82rem;font-weight:600}
+.star-row{display:flex;gap:2px}
+.star{color:#F59E0B;font-size:12px}
+.avatar-stack{display:flex}
+.avatar-stack span{width:26px;height:26px;border-radius:50%;background:var(--primary);border:2px solid white;display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:white;font-weight:700;margin-left:-8px}
+.avatar-stack span:first-child{margin-left:0}
+
+/* STATS */
+.stats-bar{background:var(--secondary);padding:24px 0}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat-item{text-align:center;color:white}
+.stat-num{font-size:1.9rem;font-weight:800;line-height:1}
+.stat-label{font-size:0.82rem;opacity:0.75;margin-top:4px}
+
+/* HOW IT WORKS */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px;position:relative}
+.steps-grid::before{content:'';position:absolute;top:36px;left:16.6%;right:16.6%;height:2px;background:linear-gradient(90deg,var(--primary-light),var(--primary),var(--primary-light));z-index:0}
+.step-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 24px;text-align:center;position:relative;z-index:1;transition:all 0.3s}
+.step-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px);border-color:var(--primary)}
+.step-num{width:56px;height:56px;background:var(--primary);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;margin:0 auto 20px;box-shadow:0 4px 14px rgba(29,184,160,0.3)}
+.step-icon{font-size:2rem;margin-bottom:10px}
+.step-card h3{margin-bottom:8px}
+
+/* SERVICES PREVIEW */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.service-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;transition:all 0.3s;cursor:pointer}
+.service-card:hover{box-shadow:var(--shadow-md);border-color:var(--primary);transform:translateY(-4px)}
+.service-emoji{font-size:2.4rem;margin-bottom:16px}
+.service-card h3{margin-bottom:8px}
+.service-card p{font-size:0.9rem}
+.service-price{display:inline-block;margin-top:14px;background:var(--primary-light);color:var(--primary-dark);padding:4px 12px;border-radius:20px;font-size:0.82rem;font-weight:600}
+
+/* TRUST */
+.trust-section{background:var(--accent)}
+.trust-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.trust-card{background:white;border-radius:var(--radius);padding:24px;text-align:center;box-shadow:var(--shadow-sm);transition:all 0.3s}
+.trust-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.trust-card-icon{font-size:2.2rem;margin-bottom:12px}
+.trust-card h3{font-size:1rem;margin-bottom:6px}
+.trust-card p{font-size:0.85rem}
+
+/* TESTIMONIALS */
+.testimonials{background:white}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.testi-card{background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;transition:all 0.3s}
+.testi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.testi-stars{display:flex;gap:3px;margin-bottom:14px}
+.testi-stars span{color:#F59E0B;font-size:1rem}
+.testi-text{font-size:0.93rem;color:var(--text-mid);line-height:1.65;margin-bottom:20px}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:44px;height:44px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1rem;flex-shrink:0}
+.testi-name{font-weight:600;font-size:0.92rem}
+.testi-role{font-size:0.8rem;color:var(--text-light)}
+
+/* CTA BANNER */
+.cta-banner{background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);padding:64px 0;text-align:center;color:white}
+.cta-banner h2{color:white;margin-bottom:12px}
+.cta-banner p{color:rgba(255,255,255,0.85);margin-bottom:32px;font-size:1.05rem}
+
+/* ═══════════════════════════════════
+   SERVICES PAGE
+═══════════════════════════════════ */
+.page-hero{background:linear-gradient(135deg,var(--accent) 0%,var(--primary-light) 100%);padding:56px 0 48px;text-align:center}
+.page-hero h1{margin-bottom:12px}
+.page-hero p{font-size:1.05rem;max-width:560px;margin:0 auto}
+.services-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:48px}
+.service-detail-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.3s}
+.service-detail-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:var(--primary)}
+.sdc-header{padding:28px 28px 20px;display:flex;align-items:flex-start;gap:16px}
+.sdc-icon{font-size:2.4rem;flex-shrink:0}
+.sdc-badge{background:var(--primary-light);color:var(--primary-dark);padding:4px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;margin-top:4px;display:inline-block}
+.sdc-body{padding:0 28px 28px}
+.sdc-includes{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.sdc-includes li{display:flex;align-items:flex-start;gap:8px;font-size:0.87rem;color:var(--text-mid)}
+.sdc-includes li::before{content:'✓';color:var(--primary);font-weight:700;flex-shrink:0;margin-top:1px}
+.sdc-price-row{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--border)}
+.sdc-price{font-size:1.1rem;font-weight:700;color:var(--text)}
+.sdc-price span{font-size:0.82rem;color:var(--text-light);font-weight:400}
+
+/* ADDONS */
+.addons-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.addon-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:all 0.3s;cursor:pointer}
+.addon-card:hover,.addon-card.selected{border-color:var(--primary);background:var(--primary-light);box-shadow:var(--shadow-sm)}
+.addon-emoji{font-size:2rem;margin-bottom:10px}
+.addon-name{font-weight:600;font-size:0.9rem;margin-bottom:4px}
+.addon-price{font-size:0.82rem;color:var(--text-light)}
+
+/* ═══════════════════════════════════
+   PRICING PAGE
+═══════════════════════════════════ */
+.pricing-toggle{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:32px}
+.pricing-toggle span{font-size:0.95rem;font-weight:500}
+.toggle-switch{width:52px;height:28px;background:#e5e7eb;border-radius:14px;position:relative;cursor:pointer;transition:background 0.3s}
+.toggle-switch.on{background:var(--primary)}
+.toggle-knob{width:22px;height:22px;background:white;border-radius:50%;position:absolute;top:3px;left:3px;transition:left 0.3s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+.toggle-switch.on .toggle-knob{left:27px}
+.save-badge{background:#FEF3C7;color:#92400E;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600}
+.pricing-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.pricing-card{background:white;border:2px solid var(--border);border-radius:var(--radius-lg);padding:32px;transition:all 0.3s;position:relative}
+.pricing-card.popular{border-color:var(--primary);box-shadow:0 8px 32px rgba(29,184,160,0.18)}
+.pricing-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.pricing-popular-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--primary);color:white;padding:4px 16px;border-radius:20px;font-size:0.78rem;font-weight:700;white-space:nowrap}
+.pricing-card h3{font-size:1.2rem;margin-bottom:6px}
+.pricing-card-sub{font-size:0.85rem;color:var(--text-light);margin-bottom:20px}
+.pricing-amount{font-size:2.8rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:4px}
+.pricing-amount span{font-size:1rem;font-weight:500;color:var(--text-mid)}
+.pricing-freq{font-size:0.82rem;color:var(--text-light);margin-bottom:24px}
+.pricing-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.pricing-features li{display:flex;align-items:center;gap:9px;font-size:0.88rem;color:var(--text-mid)}
+.pricing-features li::before{content:'✓';color:var(--primary);font-weight:700;font-size:0.95rem;flex-shrink:0}
+.pricing-scenarios{margin-top:64px}
+.scenario-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:32px}
+.scenario-card{background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
+.scenario-icon{font-size:2rem;margin-bottom:8px}
+.scenario-label{font-size:0.85rem;color:var(--text-mid);margin-bottom:12px}
+.scenario-price{font-size:1.4rem;font-weight:700;color:var(--text)}
+.scenario-note{font-size:0.75rem;color:var(--text-light);margin-top:4px}
+.no-hidden{background:linear-gradient(135deg,#FEF9C3,#FEF3C7);border:1px solid #FDE68A;border-radius:var(--radius);padding:20px 28px;display:flex;align-items:center;gap:16px;margin-top:40px}
+.no-hidden-icon{font-size:1.8rem;flex-shrink:0}
+.no-hidden h3{font-size:1rem;margin-bottom:4px;color:#92400E}
+.no-hidden p{font-size:0.87rem;color:#78350F}
+
+/* ═══════════════════════════════════
+   BOOKING PAGE
+═══════════════════════════════════ */
+.booking-layout{display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:start;margin-top:40px}
+.booking-steps-nav{display:flex;gap:0;margin-bottom:36px;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.booking-step-btn{flex:1;padding:14px 8px;background:white;font-size:0.82rem;font-weight:600;color:var(--text-light);text-align:center;cursor:default;border-right:1px solid var(--border);position:relative;transition:all 0.2s}
+.booking-step-btn:last-child{border-right:none}
+.booking-step-btn.done{background:var(--primary-light);color:var(--primary-dark)}
+.booking-step-btn.current{background:var(--primary);color:white}
+.booking-form-section{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;display:none}
+.booking-form-section.active{display:block}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:0.88rem;font-weight:600;margin-bottom:8px;color:var(--text)}
+.form-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:9px;font-size:0.93rem;transition:border-color 0.2s;background:white}
+.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(29,184,160,0.1)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.size-options{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.size-option{border:2px solid var(--border);border-radius:10px;padding:16px;cursor:pointer;transition:all 0.2s;text-align:center}
+.size-option:hover,.size-option.selected{border-color:var(--primary);background:var(--primary-light)}
+.size-option .size-icon{font-size:1.8rem;margin-bottom:6px}
+.size-option .size-name{font-weight:600;font-size:0.9rem}
+.size-option .size-hours{font-size:0.78rem;color:var(--text-light);margin-top:2px}
+.freq-options{display:flex;flex-direction:column;gap:10px}
+.freq-option{border:2px solid var(--border);border-radius:10px;padding:14px 18px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:space-between}
+.freq-option:hover,.freq-option.selected{border-color:var(--primary);background:var(--primary-light)}
+.freq-option-left{display:flex;flex-direction:column}
+.freq-option-name{font-weight:600;font-size:0.95rem}
+.freq-option-note{font-size:0.8rem;color:var(--text-light);margin-top:2px}
+.freq-option-price{font-weight:700;color:var(--primary-dark)}
+.extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.extra-option{border:2px solid var(--border);border-radius:9px;padding:12px 14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:10px}
+.extra-option:hover,.extra-option.selected{border-color:var(--primary);background:var(--primary-light)}
+.extra-emoji{font-size:1.3rem;flex-shrink:0}
+.extra-info .extra-name{font-weight:600;font-size:0.85rem}
+.extra-info .extra-price{font-size:0.78rem;color:var(--text-light)}
+.booking-nav-btns{display:flex;justify-content:space-between;margin-top:24px;gap:12px}
+/* Summary sidebar */
+.booking-summary{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;position:sticky;top:92px}
+.booking-summary h3{font-size:1rem;font-weight:700;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.summary-line{display:flex;justify-content:space-between;align-items:center;font-size:0.87rem;margin-bottom:10px;color:var(--text-mid)}
+.summary-line strong{color:var(--text)}
+.summary-total{display:flex;justify-content:space-between;align-items:center;padding-top:14px;margin-top:4px;border-top:2px solid var(--border)}
+.summary-total .label{font-weight:700;font-size:0.95rem}
+.summary-total .price{font-size:1.4rem;font-weight:800;color:var(--primary)}
+.summary-note{font-size:0.78rem;color:var(--text-light);margin-top:8px;text-align:center}
+.trust-row-sm{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+.trust-row-sm-item{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-mid)}
+.trust-row-sm-item::before{content:'🔒';font-size:0.9rem}
+
+/* ═══════════════════════════════════
+   ABOUT PAGE
+═══════════════════════════════════ */
+.about-story{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img-placeholder{background:linear-gradient(135deg,var(--primary-light),var(--accent));border-radius:var(--radius-lg);height:400px;display:flex;align-items:center;justify-content:center;font-size:6rem}
+.about-text h2{margin-bottom:20px}
+.about-text p{margin-bottom:16px;font-size:0.95rem}
+.about-values{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.value-card{text-align:center;padding:32px 20px;background:white;border:1px solid var(--border);border-radius:var(--radius-lg);transition:all 0.3s}
+.value-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px)}
+.value-icon{font-size:2.6rem;margin-bottom:14px}
+.value-card h3{margin-bottom:8px}
+.team-section{background:var(--accent);margin-top:80px;padding:64px 0;text-align:center}
+.cleaner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px}
+.cleaner-card{background:white;border-radius:var(--radius-lg);padding:24px;text-align:center;box-shadow:var(--shadow-sm);transition:all 0.3s}
+.cleaner-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px)}
+.cleaner-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--secondary));display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 14px;color:white;font-weight:800}
+.cleaner-name{font-weight:700;margin-bottom:4px}
+.cleaner-stat{font-size:0.82rem;color:var(--text-light)}
+.cleaner-stars{color:#F59E0B;font-size:0.9rem;margin-top:6px}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.process-step{text-align:center;padding:24px 16px}
+.process-step-num{width:44px;height:44px;background:var(--primary);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;margin:0 auto 14px;box-shadow:0 4px 12px rgba(29,184,160,0.3)}
+
+/* ═══════════════════════════════════
+   CONTACT PAGE
+═══════════════════════════════════ */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px}
+.contact-info h2{margin-bottom:16px}
+.contact-info p{margin-bottom:32px}
+.contact-methods{display:flex;flex-direction:column;gap:16px;margin-bottom:36px}
+.contact-method{display:flex;align-items:center;gap:14px;background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;transition:all 0.3s}
+.contact-method:hover{border-color:var(--primary);background:var(--primary-light)}
+.contact-method-icon{width:44px;height:44px;background:var(--primary-light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.contact-method-text .label{font-size:0.78rem;color:var(--text-light);margin-bottom:2px}
+.contact-method-text .value{font-weight:600;font-size:0.95rem}
+.contact-form-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px}
+.contact-form-card h3{margin-bottom:24px}
+.form-textarea{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:9px;font-size:0.93rem;min-height:120px;resize:vertical;transition:border-color 0.2s}
+.form-textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(29,184,160,0.1)}
+.form-select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:9px;font-size:0.93rem;background:white;cursor:pointer}
+.form-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(29,184,160,0.1)}
+.success-msg{background:var(--primary-light);border:1px solid var(--primary);border-radius:10px;padding:14px 18px;font-size:0.9rem;color:var(--primary-dark);font-weight:600;display:none;margin-top:12px}
+
+/* ═══════════════════════════════════
+   FAQ PAGE
+═══════════════════════════════════ */
+.faq-layout{display:grid;grid-template-columns:1fr 2fr;gap:48px;margin-top:48px}
+.faq-categories{display:flex;flex-direction:column;gap:4px;position:sticky;top:92px}
+.faq-cat-btn{padding:10px 16px;border-radius:8px;font-size:0.88rem;font-weight:500;color:var(--text-mid);cursor:pointer;text-align:left;background:transparent;transition:all 0.2s;border:none}
+.faq-cat-btn:hover,.faq-cat-btn.active{background:var(--primary-light);color:var(--primary-dark);font-weight:600}
+.faq-list{display:flex;flex-direction:column;gap:8px}
+.faq-item{background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all 0.2s}
+.faq-item:hover{border-color:var(--primary)}
+.faq-item.open{border-color:var(--primary);box-shadow:var(--shadow-sm)}
+.faq-question{padding:18px 20px;font-weight:600;font-size:0.95rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none}
+.faq-question:hover{background:#f9fafb}
+.faq-chevron{width:20px;height:20px;flex-shrink:0;color:var(--text-light);transition:transform 0.3s}
+.faq-item.open .faq-chevron{transform:rotate(180deg);color:var(--primary)}
+.faq-answer{padding:0 20px;max-height:0;overflow:hidden;transition:all 0.35s ease;font-size:0.9rem;color:var(--text-mid);line-height:1.65}
+.faq-item.open .faq-answer{padding:0 20px 18px;max-height:600px}
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer{background:var(--text);color:rgba(255,255,255,0.85);padding:56px 0 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-brand .logo-text{color:white}
+.footer-brand p{font-size:0.88rem;margin-top:14px;color:rgba(255,255,255,0.55);max-width:260px;line-height:1.65}
+.footer-social{display:flex;gap:10px;margin-top:20px}
+.footer-social a{width:36px;height:36px;background:rgba(255,255,255,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.2s;cursor:pointer}
+.footer-social a:hover{background:var(--primary)}
+.footer-col h4{font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-bottom:16px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col ul li a{font-size:0.88rem;color:rgba(255,255,255,0.65);cursor:pointer;transition:color 0.2s}
+.footer-col ul li a:hover{color:var(--primary)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:16px}
+.footer-bottom p{font-size:0.82rem;color:rgba(255,255,255,0.4)}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:0.82rem;color:rgba(255,255,255,0.4);cursor:pointer;transition:color 0.2s}
+.footer-bottom-links a:hover{color:var(--primary)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-right{max-width:420px;margin:0 auto}
+  .steps-grid::before{display:none}
+  .trust-cards{grid-template-columns:repeat(2,1fr)}
+  .testi-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .pricing-cards{grid-template-columns:1fr 1fr}
+  .pricing-cards .pricing-card:last-child{grid-column:1/-1;max-width:400px;margin:0 auto;width:100%}
+  .cleaner-grid{grid-template-columns:repeat(2,1fr)}
+  .addons-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .hero{padding:56px 0 40px}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .steps-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .trust-cards{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .services-detail-grid{grid-template-columns:1fr}
+  .pricing-cards{grid-template-columns:1fr}
+  .pricing-cards .pricing-card:last-child{grid-column:unset;max-width:unset}
+  .scenario-grid{grid-template-columns:repeat(2,1fr)}
+  .booking-layout{grid-template-columns:1fr}
+  .about-story{grid-template-columns:1fr}
+  .about-values{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:repeat(2,1fr)}
+  .contact-layout{grid-template-columns:1fr}
+  .faq-layout{grid-template-columns:1fr}
+  .faq-categories{flex-direction:row;flex-wrap:wrap;position:static}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-floating-1,.hero-floating-2{display:none}
+  .form-row{grid-template-columns:1fr}
+  .about-img-placeholder{height:240px}
+  .cleaner-grid{grid-template-columns:repeat(2,1fr)}
+  .addons-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .services-grid{grid-template-columns:1fr}
+  .size-options{grid-template-columns:1fr 1fr}
+  .extras-grid{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .trust-row{flex-direction:column;align-items:flex-start}
+  .hero-actions{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="showPage('home')">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg>
+      </div>
+      <div class="logo-text">Sweep<span>Right</span></div>
+    </div>
+    <div class="nav-links">
+      <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
+      <a onclick="showPage('services')" id="nav-services">Services</a>
+      <a onclick="showPage('pricing')" id="nav-pricing">Pricing</a>
+      <a onclick="showPage('about')" id="nav-about">About</a>
+      <a onclick="showPage('faq')" id="nav-faq">FAQ</a>
+      <a onclick="showPage('contact')" id="nav-contact">Contact</a>
+      <a onclick="showPage('booking')" class="nav-cta">Book Now</a>
+    </div>
+    <div class="burger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="showPage('home');toggleMobile()">Home</a>
+  <a onclick="showPage('services');toggleMobile()">Services</a>
+  <a onclick="showPage('pricing');toggleMobile()">Pricing</a>
+  <a onclick="showPage('about');toggleMobile()">About</a>
+  <a onclick="showPage('faq');toggleMobile()">FAQ</a>
+  <a onclick="showPage('contact');toggleMobile()">Contact</a>
+  <a onclick="showPage('booking');toggleMobile()" style="background:var(--primary);color:white;font-weight:700;text-align:center;border-radius:10px;margin-top:4px">Book Now</a>
+</div>
+
+<!-- ════════════════════════════════════════
+     HOME PAGE
+════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-badge fade-up">
+            <span class="hero-badge-dot"></span>
+            Now available across the UK
+          </div>
+          <h1 class="fade-up delay-1">Book a trusted cleaner in <span>60 seconds</span></h1>
+          <p class="hero-sub fade-up delay-2">Professional, background-checked cleaners at your door. Flexible scheduling, transparent pricing, and the same familiar face every visit.</p>
+          <div class="hero-actions fade-up delay-3">
+            <button class="btn btn-primary btn-lg" onclick="showPage('booking')">Book Now — From £25/hr</button>
+            <button class="btn btn-outline" onclick="showPage('pricing')">See Pricing</button>
+          </div>
+          <div class="trust-row fade-up delay-4">
+            <div class="trust-item">
+              <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Background-checked
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Fully insured
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              4.9★ rated
+            </div>
+          </div>
+        </div>
+        <div class="hero-right fade-up delay-2">
+          <div class="hero-floating-1">
+            <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <div><strong>4.9/5</strong> · 2,400+ reviews</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div class="hero-card-title">Quick Book</div>
+              <div class="hero-card-badge">Available Today</div>
+            </div>
+            <div class="booking-mini">
+              <div class="booking-mini-row">
+                <div class="booking-mini-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <div><div class="booking-mini-label">Property size</div><div class="booking-mini-val">2 Bedroom Apartment</div></div>
+              </div>
+              <div class="booking-mini-row">
+                <div class="booking-mini-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <div><div class="booking-mini-label">Date & Time</div><div class="booking-mini-val">Tomorrow · 9:00 AM</div></div>
+              </div>
+              <div class="booking-mini-row">
+                <div class="booking-mini-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <div><div class="booking-mini-label">Frequency</div><div class="booking-mini-val">Weekly (save 15%)</div></div>
+              </div>
+              <div class="booking-mini-btn" onclick="showPage('booking')">Confirm Booking → £100</div>
+            </div>
+          </div>
+          <div class="hero-floating-2">
+            <div class="avatar-stack">
+              <span>SA</span><span>MK</span><span>LR</span>
+            </div>
+            <div>500+ happy clients this month</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-inner">
+        <div class="stat-item"><div class="stat-num">2,400+</div><div class="stat-label">Happy Customers</div></div>
+        <div class="stat-item"><div class="stat-num">150+</div><div class="stat-label">Vetted Cleaners</div></div>
+        <div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-label">Average Rating</div></div>
+        <div class="stat-item"><div class="stat-num">98%</div><div class="stat-label">Satisfaction Rate</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <div class="container text-center">
+      <div class="tag">How It Works</div>
+      <h2>Clean home in 3 simple steps</h2>
+      <p style="margin-top:10px;max-width:480px;margin-left:auto;margin-right:auto">No phone calls, no hassle. Book, get matched, and enjoy a spotless home — all in minutes.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-icon">🖥️</div>
+          <h3>Book Online</h3>
+          <p style="font-size:0.9rem">Choose your home size, date, time, and extras. Done in under 60 seconds — no account needed to get a quote.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-icon">🧹</div>
+          <h3>Get Matched</h3>
+          <p style="font-size:0.9rem">We pair you with a background-checked, trained cleaner in your area. For recurring bookings, you keep the same cleaner every time.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-icon">✨</div>
+          <h3>Enjoy Your Home</h3>
+          <p style="font-size:0.9rem">Come home to a spotless space. Rate your cleaner, reschedule anytime, and manage everything from your dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="section" style="background:var(--accent)">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:0">
+        <div class="tag">Our Services</div>
+        <h2>Everything your home needs</h2>
+        <p style="margin-top:10px;max-width:460px;margin-left:auto;margin-right:auto">From regular maintenance to deep cleans and move-outs — we've got it covered.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card" onclick="showPage('services')">
+          <div class="service-emoji">🏠</div>
+          <h3>Standard Cleaning</h3>
+          <p style="font-size:0.9rem">Regular upkeep for kitchens, bathrooms, bedrooms, and living areas. Perfect for weekly or bi-weekly visits.</p>
+          <div class="service-price">From £25/hr</div>
+        </div>
+        <div class="service-card" onclick="showPage('services')">
+          <div class="service-emoji">🧽</div>
+          <h3>Deep Cleaning</h3>
+          <p style="font-size:0.9rem">A thorough top-to-bottom clean including inside cabinets, appliances, and hard-to-reach areas.</p>
+          <div class="service-price">From £32/hr</div>
+        </div>
+        <div class="service-card" onclick="showPage('services')">
+          <div class="service-emoji">📦</div>
+          <h3>Move In / Move Out</h3>
+          <p style="font-size:0.9rem">Leave your old place spotless or start fresh in your new home. Landlord-ready clean guaranteed.</p>
+          <div class="service-price">From £32/hr</div>
+        </div>
+        <div class="service-card" onclick="showPage('services')">
+          <div class="service-emoji">🏢</div>
+          <h3>Office Cleaning</h3>
+          <p style="font-size:0.9rem">Keep your workspace professional and hygienic. Flexible scheduling around business hours.</p>
+          <div class="service-price">From £26/hr</div>
+        </div>
+        <div class="service-card" onclick="showPage('services')">
+          <div class="service-emoji">👔</div>
+          <h3>Ironing & Laundry</h3>
+          <p style="font-size:0.9rem">Add ironing and laundry to any booking. Crisp clothes without lifting a finger.</p>
+          <div class="service-price">Add-on · £15</div>
+        </div>
+        <div class="service-card" onclick="showPage('services')">
+          <div class="service-emoji">🍽️</div>
+          <h3>Inside Appliances</h3>
+          <p style="font-size:0.9rem">Deep clean inside your oven, fridge, or microwave. Add to any booking for a fully spotless kitchen.</p>
+          <div class="service-price">Add-on · £20</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:32px">
+        <button class="btn btn-outline" onclick="showPage('services')">View All Services</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST SECTION -->
+  <section class="section trust-section">
+    <div class="container text-center">
+      <div class="tag">Why SweepRight</div>
+      <h2>Cleaning you can count on</h2>
+      <div class="trust-cards">
+        <div class="trust-card">
+          <div class="trust-card-icon">🛡️</div>
+          <h3>Background Checked</h3>
+          <p style="font-size:0.85rem">Every cleaner passes a full identity and criminal record check before joining our platform.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-card-icon">⭐</div>
+          <h3>Highly Rated</h3>
+          <p style="font-size:0.85rem">4.9/5 average across 2,400+ verified reviews. We only keep cleaners who consistently deliver excellent results.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-card-icon">🔄</div>
+          <h3>Same Cleaner</h3>
+          <p style="font-size:0.85rem">For recurring bookings, you get the same trusted cleaner every visit so they know your home perfectly.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-card-icon">📱</div>
+          <h3>Easy Management</h3>
+          <p style="font-size:0.85rem">Reschedule, cancel, or add extras with a few taps. Manage everything online, 24/7.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="text-center">
+        <div class="tag">Customer Reviews</div>
+        <h2>Loved by residents across the UK</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p class="testi-text">"I've tried several cleaning services across London but SweepRight is by far the best. My cleaner Fatima is thorough, reliable, and always on time. Booking takes literally 60 seconds."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SC</div>
+            <div><div class="testi-name">Sarah Chen</div><div class="testi-role">Business Analyst · London</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p class="testi-text">"As a busy expat family, SweepRight has been a lifesaver. We have a weekly clean and the same cleaner each time — she knows exactly how we like things. Highly recommended."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:var(--secondary)">JM</div>
+            <div><div class="testi-name">James Mitchell</div><div class="testi-role">Finance Director · Anywhere in the UK</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p class="testi-text">"Used them for a move-out clean on my flat in Shoreditch. The landlord was impressed — got my full deposit back. Will definitely use again in my new place."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#7C3AED">NR</div>
+            <div><div class="testi-name">Nour Rashid</div><div class="testi-role">Marketing Manager · Birmingham</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Ready for a cleaner home?</h2>
+      <p>Join 2,400+ UK residents who trust SweepRight. Book in 60 seconds, cancel anytime.</p>
+      <button class="btn btn-white btn-lg" onclick="showPage('booking')">Book Your First Clean</button>
+      <div style="margin-top:16px;font-size:0.85rem;opacity:0.75">No commitment · Easy rescheduling · Transparent pricing</div>
+    </div>
+  </section>
+
+</div><!-- /home -->
+
+<!-- ════════════════════════════════════════
+     SERVICES PAGE
+════════════════════════════════════════ -->
+<div id="page-services" class="page">
+  <div class="page-hero">
+    <div class="container">
+      <div class="tag">Our Services</div>
+      <h1>Professional cleaning for every need</h1>
+      <p>From standard weekly cleans to specialist deep cleans — all delivered by vetted, trained professionals.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="services-detail-grid">
+
+        <div class="service-detail-card">
+          <div class="sdc-header">
+            <div class="sdc-icon">🏠</div>
+            <div>
+              <h3>Standard Home Cleaning</h3>
+              <span class="sdc-badge">Most Popular</span>
+              <p style="font-size:0.88rem;color:var(--text-mid);margin-top:6px">Perfect for regular upkeep. Keep your home consistently clean with weekly or bi-weekly visits.</p>
+            </div>
+          </div>
+          <div class="sdc-body">
+            <ul class="sdc-includes">
+              <li>Vacuuming and mopping all floors</li>
+              <li>Dusting all surfaces, shelves, and furniture</li>
+              <li>Kitchen surfaces, hob, and sink cleaned</li>
+              <li>Bathrooms scrubbed and sanitised</li>
+              <li>Bins emptied and replaced</li>
+              <li>Beds changed (fresh linen provided by you)</li>
+              <li>General tidying and organising</li>
+            </ul>
+            <div class="sdc-price-row">
+              <div class="sdc-price">From £25/hr <span>(min. 3 hrs)</span></div>
+              <button class="btn btn-primary" style="padding:9px 20px;font-size:0.88rem" onclick="showPage('booking')">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-detail-card">
+          <div class="sdc-header">
+            <div class="sdc-icon">🧽</div>
+            <div>
+              <h3>Deep Cleaning</h3>
+              <span class="sdc-badge">Thorough</span>
+              <p style="font-size:0.88rem;color:var(--text-mid);margin-top:6px">A comprehensive clean for homes that need extra attention — ideal for first-time cleans or seasonal refreshes.</p>
+            </div>
+          </div>
+          <div class="sdc-body">
+            <ul class="sdc-includes">
+              <li>Everything in Standard Cleaning, plus:</li>
+              <li>Inside all kitchen cabinets and drawers</li>
+              <li>Behind and under all appliances</li>
+              <li>Skirting boards, door frames, and light switches</li>
+              <li>Window sills and tracks</li>
+              <li>Bathroom grout and tile scrubbing</li>
+              <li>Inside wardrobes and storage areas</li>
+            </ul>
+            <div class="sdc-price-row">
+              <div class="sdc-price">From £32/hr <span>(min. 4 hrs)</span></div>
+              <button class="btn btn-primary" style="padding:9px 20px;font-size:0.88rem" onclick="showPage('booking')">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-detail-card">
+          <div class="sdc-header">
+            <div class="sdc-icon">📦</div>
+            <div>
+              <h3>Move In / Move Out Cleaning</h3>
+              <span class="sdc-badge">Deposit-Ready</span>
+              <p style="font-size:0.88rem;color:var(--text-mid);margin-top:6px">Leave your old home spotless and reclaim your deposit — or start fresh in a perfectly clean new space.</p>
+            </div>
+          </div>
+          <div class="sdc-body">
+            <ul class="sdc-includes">
+              <li>Full deep clean of every room</li>
+              <li>Oven, fridge, and dishwasher cleaned inside and out</li>
+              <li>All cupboards, drawers, and shelves emptied and cleaned</li>
+              <li>Bathroom and kitchen descaled and sanitised</li>
+              <li>All walls spot-cleaned</li>
+              <li>Windows cleaned inside</li>
+              <li>Landlord inspection checklist followed</li>
+            </ul>
+            <div class="sdc-price-row">
+              <div class="sdc-price">From £32/hr <span>(min. 4 hrs)</span></div>
+              <button class="btn btn-primary" style="padding:9px 20px;font-size:0.88rem" onclick="showPage('booking')">Book Now</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-detail-card">
+          <div class="sdc-header">
+            <div class="sdc-icon">🏢</div>
+            <div>
+              <h3>Office &amp; Commercial Cleaning</h3>
+              <span class="sdc-badge">Business</span>
+              <p style="font-size:0.88rem;color:var(--text-mid);margin-top:6px">Professional workspace cleaning scheduled around your business hours. Flexible contracts available.</p>
+            </div>
+          </div>
+          <div class="sdc-body">
+            <ul class="sdc-includes">
+              <li>Desk surfaces, chairs, and communal areas cleaned</li>
+              <li>Kitchen and breakroom sanitised</li>
+              <li>Toilets and bathrooms deep cleaned</li>
+              <li>Floors vacuumed and mopped</li>
+              <li>Bins emptied and waste removed</li>
+              <li>Glass partitions and door handles wiped</li>
+              <li>Early morning or evening slots available</li>
+            </ul>
+            <div class="sdc-price-row">
+              <div class="sdc-price">From £26/hr <span>(custom quote)</span></div>
+              <button class="btn btn-primary" style="padding:9px 20px;font-size:0.88rem" onclick="showPage('contact')">Get Quote</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ADD-ONS -->
+      <div style="margin-top:64px">
+        <div class="text-center" style="margin-bottom:0">
+          <div class="tag">Add-Ons</div>
+          <h2>Extras you can add to any booking</h2>
+          <p style="margin-top:8px;max-width:460px;margin:8px auto 0">Customise your clean with these optional extras — added at checkout in seconds.</p>
+        </div>
+        <div class="addons-grid" style="margin-top:36px">
+          <div class="addon-card"><div class="addon-emoji">👔</div><div class="addon-name">Ironing</div><div class="addon-price">+ £15 per visit</div></div>
+          <div class="addon-card"><div class="addon-emoji">🧺</div><div class="addon-name">Laundry</div><div class="addon-price">+ £12 per visit</div></div>
+          <div class="addon-card"><div class="addon-emoji">🧊</div><div class="addon-name">Inside Fridge</div><div class="addon-price">+ £20 per visit</div></div>
+          <div class="addon-card"><div class="addon-emoji">🍳</div><div class="addon-name">Inside Oven</div><div class="addon-price">+ £22 per visit</div></div>
+          <div class="addon-card"><div class="addon-emoji">🪟</div><div class="addon-name">Interior Windows</div><div class="addon-price">+ £18 per visit</div></div>
+          <div class="addon-card"><div class="addon-emoji">🛋️</div><div class="addon-name">Sofa Cleaning</div><div class="addon-price">+ £30 per visit</div></div>
+          <div class="addon-card"><div class="addon-emoji">🐾</div><div class="addon-name">Pet Hair Removal</div><div class="addon-price">+ £12 per visit</div></div>
+          <div class="addon-card"><div class="addon-emoji">🪴</div><div class="addon-name">Balcony Clean</div><div class="addon-price">+ £15 per visit</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Ready to book?</h2>
+      <p>Choose your service and get a cleaner at your door — as soon as tomorrow.</p>
+      <button class="btn btn-white btn-lg" onclick="showPage('booking')">Book Now</button>
+    </div>
+  </section>
+</div><!-- /services -->
+
+<!-- ════════════════════════════════════════
+     PRICING PAGE
+════════════════════════════════════════ -->
+<div id="page-pricing" class="page">
+  <div class="page-hero">
+    <div class="container">
+      <div class="tag">Pricing</div>
+      <h1>Transparent, honest pricing</h1>
+      <p>No hidden fees. No surprises. Pay only for the time you need, with discounts for regular bookings.</p>
+      <div class="pricing-toggle">
+        <span>One-off</span>
+        <div class="toggle-switch" id="pricingToggle" onclick="togglePricing()"><div class="toggle-knob"></div></div>
+        <span>Recurring</span>
+        <span class="save-badge">Save up to 20%</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <h3>Standard Clean</h3>
+          <div class="pricing-card-sub">For regular home upkeep</div>
+          <div class="pricing-amount" id="std-price">£25<span>/hr</span></div>
+          <div class="pricing-freq" id="std-note">One-off booking · min. 3 hrs</div>
+          <ul class="pricing-features">
+            <li>All rooms vacuumed &amp; mopped</li>
+            <li>Kitchen &amp; bathrooms cleaned</li>
+            <li>Surfaces dusted</li>
+            <li>Bins emptied</li>
+            <li>Beds changed (linen provided)</li>
+            <li>Same cleaner on recurring visits</li>
+          </ul>
+          <button class="btn btn-outline" style="width:100%" onclick="showPage('booking')">Book Standard Clean</button>
+        </div>
+        <div class="pricing-card popular">
+          <div class="pricing-popular-badge">⭐ Most Popular</div>
+          <h3>Deep Clean</h3>
+          <div class="pricing-card-sub">For a thorough top-to-bottom refresh</div>
+          <div class="pricing-amount" id="deep-price">£32<span>/hr</span></div>
+          <div class="pricing-freq" id="deep-note">One-off booking · min. 4 hrs</div>
+          <ul class="pricing-features">
+            <li>Everything in Standard, plus:</li>
+            <li>Inside cabinets &amp; appliances</li>
+            <li>Skirting boards &amp; door frames</li>
+            <li>Window sills &amp; tracks</li>
+            <li>Behind &amp; under appliances</li>
+            <li>Bathroom grout scrubbing</li>
+          </ul>
+          <button class="btn btn-primary" style="width:100%" onclick="showPage('booking')">Book Deep Clean</button>
+        </div>
+        <div class="pricing-card">
+          <h3>Move In/Out Clean</h3>
+          <div class="pricing-card-sub">Deposit-ready, landlord approved</div>
+          <div class="pricing-amount" id="move-price">£32<span>/hr</span></div>
+          <div class="pricing-freq" id="move-note">One-off booking · min. 4 hrs</div>
+          <ul class="pricing-features">
+            <li>Full property deep clean</li>
+            <li>Inside all appliances</li>
+            <li>All cupboards emptied &amp; cleaned</li>
+            <li>Windows cleaned inside</li>
+            <li>Walls spot-cleaned</li>
+            <li>Landlord checklist followed</li>
+          </ul>
+          <button class="btn btn-outline" style="width:100%" onclick="showPage('booking')">Book Move Clean</button>
+        </div>
+      </div>
+
+      <!-- EXAMPLE SCENARIOS -->
+      <div class="pricing-scenarios">
+        <div class="text-center">
+          <div class="tag">Example Pricing</div>
+          <h2>What does it cost for my home?</h2>
+          <p style="margin-top:8px;max-width:500px;margin-left:auto;margin-right:auto">Estimated prices for a standard weekly clean. Actual time may vary based on condition and add-ons selected.</p>
+        </div>
+        <div class="scenario-grid">
+          <div class="scenario-card">
+            <div class="scenario-icon">🏡</div>
+            <div class="scenario-label">Studio Apartment</div>
+            <div class="scenario-price">£75</div>
+            <div class="scenario-note">3 hrs · weekly rate</div>
+          </div>
+          <div class="scenario-card">
+            <div class="scenario-icon">🛏️</div>
+            <div class="scenario-label">1 Bedroom</div>
+            <div class="scenario-price">£85</div>
+            <div class="scenario-note">3.4 hrs · weekly rate</div>
+          </div>
+          <div class="scenario-card">
+            <div class="scenario-icon">🏠</div>
+            <div class="scenario-label">2 Bedroom</div>
+            <div class="scenario-price">£100</div>
+            <div class="scenario-note">4.2 hrs · weekly rate</div>
+          </div>
+          <div class="scenario-card">
+            <div class="scenario-icon">🏘️</div>
+            <div class="scenario-label">3 Bedroom Villa</div>
+            <div class="scenario-price">£150</div>
+            <div class="scenario-note">6 hrs · weekly rate</div>
+          </div>
+        </div>
+
+        <div class="no-hidden">
+          <div class="no-hidden-icon">💛</div>
+          <div>
+            <h3>No hidden fees — ever</h3>
+            <p>The price you see is the price you pay. No registration fees, no booking fees, no surprise charges. Supplies and equipment are included. You can cancel or reschedule up to 24 hours before your booking at no cost.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FREQUENCY DISCOUNT TABLE -->
+      <div style="margin-top:64px">
+        <div class="text-center">
+          <div class="tag">Frequency Discounts</div>
+          <h2>The more often, the less you pay</h2>
+        </div>
+        <div style="margin-top:32px;overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+            <thead>
+              <tr style="background:var(--primary);color:white;text-align:left">
+                <th style="padding:14px 20px;border-radius:10px 0 0 0">Frequency</th>
+                <th style="padding:14px 20px">Standard Rate</th>
+                <th style="padding:14px 20px">Your Rate</th>
+                <th style="padding:14px 20px;border-radius:0 10px 0 0">You Save</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:14px 20px;font-weight:600">One-off</td>
+                <td style="padding:14px 20px;color:var(--text-mid)">£25/hr</td>
+                <td style="padding:14px 20px;font-weight:600">£25/hr</td>
+                <td style="padding:14px 20px;color:var(--text-light)">—</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#fafafa">
+                <td style="padding:14px 20px;font-weight:600">Monthly</td>
+                <td style="padding:14px 20px;color:var(--text-mid)">£25/hr</td>
+                <td style="padding:14px 20px;font-weight:600;color:var(--primary-dark)">£22/hr</td>
+                <td style="padding:14px 20px;color:#059669;font-weight:600">Save 7%</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:14px 20px;font-weight:600">Bi-Weekly</td>
+                <td style="padding:14px 20px;color:var(--text-mid)">£25/hr</td>
+                <td style="padding:14px 20px;font-weight:600;color:var(--primary-dark)">£21/hr</td>
+                <td style="padding:14px 20px;color:#059669;font-weight:600">Save 11%</td>
+              </tr>
+              <tr style="background:var(--primary-light)">
+                <td style="padding:14px 20px;font-weight:700">Weekly</td>
+                <td style="padding:14px 20px;color:var(--text-mid)">£25/hr</td>
+                <td style="padding:14px 20px;font-weight:700;color:var(--primary-dark)">£20/hr</td>
+                <td style="padding:14px 20px;color:#059669;font-weight:700">Save 15% 🎉</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /pricing -->
+
+<!-- ════════════════════════════════════════
+     BOOKING PAGE
+════════════════════════════════════════ -->
+<div id="page-booking" class="page">
+  <div class="page-hero">
+    <div class="container text-center">
+      <div class="tag">Book a Cleaner</div>
+      <h1>Your clean home is 60 seconds away</h1>
+      <p>Fill in the details below and we'll match you with a trusted cleaner in your area.</p>
+    </div>
+  </div>
+
+  <section class="section-sm">
+    <div class="container">
+      <div class="booking-steps-nav">
+        <div class="booking-step-btn current" id="bsb-1">1. Property</div>
+        <div class="booking-step-btn" id="bsb-2">2. Date &amp; Time</div>
+        <div class="booking-step-btn" id="bsb-3">3. Frequency</div>
+        <div class="booking-step-btn" id="bsb-4">4. Extras</div>
+        <div class="booking-step-btn" id="bsb-5">5. Address</div>
+        <div class="booking-step-btn" id="bsb-6">6. Payment</div>
+      </div>
+      <div class="booking-layout">
+        <div>
+          <!-- STEP 1: Property -->
+          <div class="booking-form-section active" id="bs-1">
+            <h3 style="margin-bottom:6px">Tell us about your property</h3>
+            <p style="font-size:0.88rem;margin-bottom:24px">Select your property size and cleaning type.</p>
+            <div class="form-group">
+              <div class="form-label">Property Size</div>
+              <div class="size-options">
+                <div class="size-option" onclick="selectSize(this,'Studio',3,'£75')">
+                  <div class="size-icon">🏡</div>
+                  <div class="size-name">Studio</div>
+                  <div class="size-hours">~3 hrs</div>
+                </div>
+                <div class="size-option" onclick="selectSize(this,'1 Bedroom',3.5,'£85')">
+                  <div class="size-icon">🛏️</div>
+                  <div class="size-name">1 Bedroom</div>
+                  <div class="size-hours">~3.5 hrs</div>
+                </div>
+                <div class="size-option selected" onclick="selectSize(this,'2 Bedroom',4,'£100')">
+                  <div class="size-icon">🏠</div>
+                  <div class="size-name">2 Bedroom</div>
+                  <div class="size-hours">~4 hrs</div>
+                </div>
+                <div class="size-option" onclick="selectSize(this,'3 Bedroom',5,'£125')">
+                  <div class="size-icon">🏘️</div>
+                  <div class="size-name">3 Bedroom</div>
+                  <div class="size-hours">~5 hrs</div>
+                </div>
+                <div class="size-option" onclick="selectSize(this,'4+ Bedroom',7,'£175')">
+                  <div class="size-icon">🏰</div>
+                  <div class="size-name">4+ Bedroom</div>
+                  <div class="size-hours">~7 hrs</div>
+                </div>
+                <div class="size-option" onclick="selectSize(this,'Villa',8,'£200')">
+                  <div class="size-icon">🌴</div>
+                  <div class="size-name">Villa</div>
+                  <div class="size-hours">~8 hrs</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Cleaning Type</div>
+              <select class="form-select" onchange="updateCleanType(this.value)">
+                <option value="standard">Standard Clean — £25/hr</option>
+                <option value="deep">Deep Clean — £32/hr</option>
+                <option value="moveout">Move In / Move Out — £32/hr</option>
+              </select>
+            </div>
+            <div class="booking-nav-btns" style="justify-content:flex-end">
+              <button class="btn btn-primary" onclick="goBookingStep(2)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Date & Time -->
+          <div class="booking-form-section" id="bs-2">
+            <h3 style="margin-bottom:6px">When would you like your clean?</h3>
+            <p style="font-size:0.88rem;margin-bottom:24px">Available 7 days a week, 8am–8pm.</p>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Preferred Date</label>
+                <input type="date" class="form-input" id="bookingDate">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Start Time</label>
+                <select class="form-select" id="bookingTime">
+                  <option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option>
+                  <option selected>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option>
+                  <option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option>
+                  <option>5:00 PM</option><option>6:00 PM</option>
+                </select>
+              </div>
+            </div>
+            <div style="background:var(--primary-light);border-radius:9px;padding:14px 18px;font-size:0.85rem;color:var(--primary-dark);margin-top:4px">
+              💡 <strong>Tip:</strong> Booking before 10am gives you the best cleaner availability for same-day or next-day slots.
+            </div>
+            <div class="booking-nav-btns">
+              <button class="btn btn-outline" onclick="goBookingStep(1)">← Back</button>
+              <button class="btn btn-primary" onclick="goBookingStep(3)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Frequency -->
+          <div class="booking-form-section" id="bs-3">
+            <h3 style="margin-bottom:6px">How often would you like us?</h3>
+            <p style="font-size:0.88rem;margin-bottom:24px">Recurring bookings save money and give you the same cleaner every time.</p>
+            <div class="freq-options">
+              <div class="freq-option" onclick="selectFreq(this,'One-off',0)">
+                <div class="freq-option-left">
+                  <div class="freq-option-name">One-off</div>
+                  <div class="freq-option-note">A single visit, no commitment</div>
+                </div>
+                <div class="freq-option-price">£25/hr</div>
+              </div>
+              <div class="freq-option" onclick="selectFreq(this,'Monthly',7)">
+                <div class="freq-option-left">
+                  <div class="freq-option-name">Monthly</div>
+                  <div class="freq-option-note">Once a month · save 7%</div>
+                </div>
+                <div class="freq-option-price">£22/hr</div>
+              </div>
+              <div class="freq-option selected" onclick="selectFreq(this,'Bi-Weekly',11)">
+                <div class="freq-option-left">
+                  <div class="freq-option-name">Every Two Weeks</div>
+                  <div class="freq-option-note">Bi-weekly · save 11%</div>
+                </div>
+                <div class="freq-option-price">£21/hr</div>
+              </div>
+              <div class="freq-option" onclick="selectFreq(this,'Weekly',15)">
+                <div class="freq-option-left">
+                  <div class="freq-option-name">Every Week ⭐</div>
+                  <div class="freq-option-note">Weekly · best value · save 15%</div>
+                </div>
+                <div class="freq-option-price">£20/hr</div>
+              </div>
+            </div>
+            <div class="booking-nav-btns">
+              <button class="btn btn-outline" onclick="goBookingStep(2)">← Back</button>
+              <button class="btn btn-primary" onclick="goBookingStep(4)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: Extras -->
+          <div class="booking-form-section" id="bs-4">
+            <h3 style="margin-bottom:6px">Add any extras</h3>
+            <p style="font-size:0.88rem;margin-bottom:24px">Optional add-ons to customise your clean.</p>
+            <div class="extras-grid">
+              <div class="extra-option" onclick="toggleExtra(this,30,'Ironing')"><div class="extra-emoji">👔</div><div class="extra-info"><div class="extra-name">Ironing</div><div class="extra-price">+ £15</div></div></div>
+              <div class="extra-option" onclick="toggleExtra(this,25,'Laundry')"><div class="extra-emoji">🧺</div><div class="extra-info"><div class="extra-name">Laundry</div><div class="extra-price">+ £12</div></div></div>
+              <div class="extra-option" onclick="toggleExtra(this,40,'Inside Fridge')"><div class="extra-emoji">🧊</div><div class="extra-info"><div class="extra-name">Inside Fridge</div><div class="extra-price">+ £20</div></div></div>
+              <div class="extra-option" onclick="toggleExtra(this,45,'Inside Oven')"><div class="extra-emoji">🍳</div><div class="extra-info"><div class="extra-name">Inside Oven</div><div class="extra-price">+ £22</div></div></div>
+              <div class="extra-option" onclick="toggleExtra(this,35,'Interior Windows')"><div class="extra-emoji">🪟</div><div class="extra-info"><div class="extra-name">Interior Windows</div><div class="extra-price">+ £18</div></div></div>
+              <div class="extra-option" onclick="toggleExtra(this,30,'Balcony Clean')"><div class="extra-emoji">🌅</div><div class="extra-info"><div class="extra-name">Balcony Clean</div><div class="extra-price">+ £15</div></div></div>
+            </div>
+            <div class="booking-nav-btns">
+              <button class="btn btn-outline" onclick="goBookingStep(3)">← Back</button>
+              <button class="btn btn-primary" onclick="goBookingStep(5)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 5: Address -->
+          <div class="booking-form-section" id="bs-5">
+            <h3 style="margin-bottom:6px">Where should we send your cleaner?</h3>
+            <p style="font-size:0.88rem;margin-bottom:24px">Your address is kept private and only shared with your assigned cleaner.</p>
+            <div class="form-group">
+              <label class="form-label">Area / District</label>
+              <select class="form-select">
+                <option>London — Central</option><option>London — North</option><option>London — South</option>
+                <option>London — East</option><option>London — West</option><option>Manchester</option>
+                <option>Birmingham</option><option>Leeds</option><option>Bristol</option>
+                <option>Edinburgh</option><option>Liverpool</option><option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Apartment / Villa Number</label>
+              <input type="text" class="form-input" placeholder="e.g. Apt 1204, Tower B">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Building / Street Name</label>
+              <input type="text" class="form-input" placeholder="e.g. Marina Gate 2">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Your Name</label>
+                <input type="text" class="form-input" placeholder="Full name">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-input" placeholder="+44 7000 000000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Access Instructions (optional)</label>
+              <input type="text" class="form-input" placeholder="e.g. Key with concierge, buzzer code: 1234">
+            </div>
+            <div class="booking-nav-btns">
+              <button class="btn btn-outline" onclick="goBookingStep(4)">← Back</button>
+              <button class="btn btn-primary" onclick="goBookingStep(6)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 6: Payment -->
+          <div class="booking-form-section" id="bs-6">
+            <h3 style="margin-bottom:6px">Secure Payment</h3>
+            <p style="font-size:0.88rem;margin-bottom:24px">Your payment is encrypted and secure. You won't be charged until your booking is confirmed.</p>
+            <div style="background:#f9fafb;border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-mid)">
+              🔒 <strong>SSL Secured</strong> — 256-bit encryption. We accept Visa, Mastercard, and Apple Pay.
+            </div>
+            <div class="form-group">
+              <label class="form-label">Cardholder Name</label>
+              <input type="text" class="form-input" placeholder="Name on card">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Card Number</label>
+              <input type="text" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Expiry Date</label>
+                <input type="text" class="form-input" placeholder="MM / YY" maxlength="7">
+              </div>
+              <div class="form-group">
+                <label class="form-label">CVV</label>
+                <input type="text" class="form-input" placeholder="•••" maxlength="4">
+              </div>
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;margin-top:4px">
+              <input type="checkbox" id="termsCheck" style="margin-top:3px;accent-color:var(--primary);width:16px;height:16px;flex-shrink:0">
+              <label for="termsCheck" style="font-size:0.85rem;color:var(--text-mid);cursor:pointer">I agree to the <a href="#" style="color:var(--primary)">Terms &amp; Conditions</a> and <a href="#" style="color:var(--primary)">Privacy Policy</a>. I understand I can cancel or reschedule up to 24 hours before my booking for free.</label>
+            </div>
+            <div class="booking-nav-btns">
+              <button class="btn btn-outline" onclick="goBookingStep(5)">← Back</button>
+              <button class="btn btn-primary btn-lg" style="flex:1" onclick="confirmBooking()">Confirm &amp; Pay</button>
+            </div>
+            <!-- Success state -->
+            <div id="bookingSuccess" style="display:none;background:var(--primary-light);border:1px solid var(--primary);border-radius:12px;padding:24px;margin-top:20px;text-align:center">
+              <div style="font-size:2.5rem;margin-bottom:12px">🎉</div>
+              <h3 style="color:var(--primary-dark);margin-bottom:8px">Booking Confirmed!</h3>
+              <p style="font-size:0.9rem;color:var(--text-mid)">We've received your booking and will send a confirmation to your email. Your cleaner will contact you 1 hour before arrival.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUMMARY SIDEBAR -->
+        <div class="booking-summary">
+          <h3>Booking Summary</h3>
+          <div class="summary-line"><span>Property</span><strong id="sum-size">2 Bedroom</strong></div>
+          <div class="summary-line"><span>Clean Type</span><strong id="sum-type">Standard Clean</strong></div>
+          <div class="summary-line"><span>Duration</span><strong id="sum-hrs">4 hrs</strong></div>
+          <div class="summary-line"><span>Frequency</span><strong id="sum-freq">Bi-Weekly</strong></div>
+          <div class="summary-line" id="sum-extras-row" style="display:none"><span>Extras</span><strong id="sum-extras">—</strong></div>
+          <div class="summary-total">
+            <div class="label">Total</div>
+            <div class="price" id="sum-total">£100</div>
+          </div>
+          <div class="summary-note">Per visit · no hidden fees</div>
+          <div class="trust-row-sm">
+            <div class="trust-row-sm-item" style="--before:''">🔒 Secure payment processing</div>
+            <div class="trust-row-sm-item">✅ Free cancellation · 24h notice</div>
+            <div class="trust-row-sm-item">🧹 Background-checked cleaners</div>
+            <div class="trust-row-sm-item">⭐ Satisfaction guarantee</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /booking -->
+
+<!-- ════════════════════════════════════════
+     ABOUT PAGE
+════════════════════════════════════════ -->
+<div id="page-about" class="page">
+  <div class="page-hero">
+    <div class="container">
+      <div class="tag">About Us</div>
+      <h1>Making home cleaning simple, reliable &amp; trustworthy</h1>
+      <p>We believe everyone deserves a clean home without the stress of finding and managing cleaners themselves.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-story">
+        <div class="about-img-placeholder">🏠</div>
+        <div class="about-text">
+          <div class="tag">Our Story</div>
+          <h2>Built for busy people across the UK</h2>
+          <p>SweepRight was founded by a team right here in the UK who were frustrated with the unreliable, overpriced, and opaque home cleaning market. We knew there had to be a better way.</p>
+          <p>We built a tech platform that takes the hassle out of everything — from finding a trustworthy cleaner to managing recurring bookings, payments, and scheduling. All in one place, from your phone.</p>
+          <p>Today we serve thousands of happy households across the UK, from studio flats in city centres to family homes in the suburbs — and we're just getting started.</p>
+          <div style="display:flex;gap:20px;margin-top:28px;flex-wrap:wrap">
+            <div style="text-align:center">
+              <div style="font-size:2rem;font-weight:800;color:var(--primary)">2,400+</div>
+              <div style="font-size:0.82rem;color:var(--text-light)">Homes cleaned</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:2rem;font-weight:800;color:var(--primary)">150+</div>
+              <div style="font-size:0.82rem;color:var(--text-light)">Vetted cleaners</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:2rem;font-weight:800;color:var(--primary)">4.9★</div>
+              <div style="font-size:0.82rem;color:var(--text-light)">Average rating</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-values">
+        <div class="value-card">
+          <div class="value-icon">🛡️</div>
+          <h3>Trust &amp; Safety</h3>
+          <p style="font-size:0.88rem">Every cleaner on our platform passes a full background and identity check, personal interview, and practical assessment before their first booking.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">⭐</div>
+          <h3>Quality Assurance</h3>
+          <p style="font-size:0.88rem">We monitor every booking through post-visit ratings. Cleaners who don't meet our standards are removed. We stand behind every clean with a satisfaction guarantee.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💡</div>
+          <h3>Simplicity First</h3>
+          <p style="font-size:0.88rem">Technology should make life easier. That's why we've stripped away the complexity — book, pay, and manage everything in one place, in under 60 seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE VET -->
+  <section class="section" style="background:var(--accent)">
+    <div class="container text-center">
+      <div class="tag">Our Vetting Process</div>
+      <h2>Every cleaner earns your trust</h2>
+      <p style="max-width:500px;margin:10px auto 0">Only 1 in 5 applicants makes it onto the SweepRight platform. Here's how we screen them:</p>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-step-num">1</div>
+          <h3 style="font-size:0.95rem;margin-bottom:6px">Application Review</h3>
+          <p style="font-size:0.85rem">Full work history, references, and ID verification reviewed by our team.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">2</div>
+          <h3 style="font-size:0.95rem;margin-bottom:6px">Criminal Record Check</h3>
+          <p style="font-size:0.85rem">Background screening through authorised UK government databases.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">3</div>
+          <h3 style="font-size:0.95rem;margin-bottom:6px">In-Person Interview</h3>
+          <p style="font-size:0.85rem">Face-to-face interview assessing professionalism, communication, and reliability.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">4</div>
+          <h3 style="font-size:0.95rem;margin-bottom:6px">Practical Assessment</h3>
+          <p style="font-size:0.85rem">Hands-on cleaning test to verify quality standards and technique before going live.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM CLEANERS -->
+  <section class="team-section">
+    <div class="container">
+      <div class="tag">Meet Some of Our Team</div>
+      <h2>The people behind your clean home</h2>
+      <div class="cleaner-grid">
+        <div class="cleaner-card">
+          <div class="cleaner-avatar">F</div>
+          <div class="cleaner-name">Fatima A.</div>
+          <div class="cleaner-stat">Anywhere in the UK · 3 yrs exp</div>
+          <div class="cleaner-stars">★★★★★ 4.9</div>
+        </div>
+        <div class="cleaner-card">
+          <div class="cleaner-avatar" style="background:var(--secondary)">M</div>
+          <div class="cleaner-name">Maria S.</div>
+          <div class="cleaner-stat">Manchester · 5 yrs exp</div>
+          <div class="cleaner-stars">★★★★★ 5.0</div>
+        </div>
+        <div class="cleaner-card">
+          <div class="cleaner-avatar" style="background:#7C3AED">R</div>
+          <div class="cleaner-name">Riya P.</div>
+          <div class="cleaner-stat">Birmingham · 2 yrs exp</div>
+          <div class="cleaner-stars">★★★★★ 4.8</div>
+        </div>
+        <div class="cleaner-card">
+          <div class="cleaner-avatar" style="background:#D97706">K</div>
+          <div class="cleaner-name">Kevin D.</div>
+          <div class="cleaner-stat">Bristol · Leeds · 4 yrs exp</div>
+          <div class="cleaner-stars">★★★★★ 4.9</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /about -->
+
+<!-- ════════════════════════════════════════
+     CONTACT PAGE
+════════════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <div class="container">
+      <div class="tag">Get in Touch</div>
+      <h1>We're here to help</h1>
+      <p>Questions about a booking, pricing, or anything else? We typically reply within 30 minutes during business hours.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-layout">
+        <div class="contact-info">
+          <div class="tag">Contact Details</div>
+          <h2>Talk to a real person</h2>
+          <p>Our customer support team is available 7 days a week, 8am–10pm UK time. We don't use bots — every message is handled by a real human.</p>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-method-icon">📞</div>
+              <div class="contact-method-text">
+                <div class="label">Phone / WhatsApp</div>
+                <div class="value">+44 20 0000 0000</div>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon">📧</div>
+              <div class="contact-method-text">
+                <div class="label">Email</div>
+                <div class="value">hello@sweepright.co.uk</div>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon">💬</div>
+              <div class="contact-method-text">
+                <div class="label">Live Chat</div>
+                <div class="value">Available on this website · avg. reply 2 min</div>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon">🕐</div>
+              <div class="contact-method-text">
+                <div class="label">Support Hours</div>
+                <div class="value">7 days a week · 8:00 AM – 10:00 PM UK</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--primary-light);border-radius:var(--radius);padding:20px 22px">
+            <div style="font-weight:700;margin-bottom:6px;color:var(--primary-dark)">🚀 Need to change a booking?</div>
+            <p style="font-size:0.87rem">Log into your account dashboard to reschedule, cancel, or update any upcoming booking — no need to contact us.</p>
+            <button class="btn btn-primary" style="margin-top:12px;padding:9px 18px;font-size:0.85rem" onclick="showPage('booking')">Manage Booking</button>
+          </div>
+        </div>
+        <div class="contact-form-card">
+          <h3>Send us a message</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-input" placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-input" placeholder="Your surname">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone (optional)</label>
+            <input type="tel" class="form-input" placeholder="+44 7000 000000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">What can we help with?</label>
+            <select class="form-select">
+              <option>General enquiry</option>
+              <option>Booking question</option>
+              <option>Change or cancel a booking</option>
+              <option>Cleaner feedback</option>
+              <option>Pricing &amp; services</option>
+              <option>Business / office cleaning</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell us how we can help you..."></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%" onclick="submitContact()">Send Message</button>
+          <div class="success-msg" id="contactSuccess">✅ Message sent! We'll get back to you within 30 minutes.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /contact -->
+
+<!-- ════════════════════════════════════════
+     FAQ PAGE
+════════════════════════════════════════ -->
+<div id="page-faq" class="page">
+  <div class="page-hero">
+    <div class="container text-center">
+      <div class="tag">FAQ</div>
+      <h1>Frequently Asked Questions</h1>
+      <p>Everything you need to know about SweepRight. Can't find your answer? <a onclick="showPage('contact')" style="color:var(--primary);cursor:pointer;font-weight:600">Contact us.</a></p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="faq-layout">
+        <div class="faq-categories">
+          <div class="faq-cat-btn active" onclick="filterFaq('all',this)">All Questions</div>
+          <div class="faq-cat-btn" onclick="filterFaq('pricing',this)">💰 Pricing</div>
+          <div class="faq-cat-btn" onclick="filterFaq('booking',this)">📅 Booking</div>
+          <div class="faq-cat-btn" onclick="filterFaq('cleaners',this)">🧹 Our Cleaners</div>
+          <div class="faq-cat-btn" onclick="filterFaq('supplies',this)">🧴 Supplies</div>
+          <div class="faq-cat-btn" onclick="filterFaq('quality',this)">⭐ Quality</div>
+        </div>
+        <div class="faq-list" id="faqList">
+          <!-- Pricing -->
+          <div class="faq-item" data-cat="pricing">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              How much does a clean cost?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Our standard clean starts from £25/hr with a minimum of 3 hours. Deep cleans and move-in/out cleans start from £32/hr. Recurring bookings receive discounts of 7–15% depending on frequency. You can see full pricing on our <a onclick="showPage('pricing')" style="color:var(--primary);cursor:pointer">Pricing page</a>.</div>
+          </div>
+          <div class="faq-item" data-cat="pricing">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Are there any hidden fees?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Absolutely not. There are no booking fees, registration fees, or hidden charges. The price you see when you book is the price you pay. Cleaning supplies and equipment are included in the hourly rate.</div>
+          </div>
+          <div class="faq-item" data-cat="pricing">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Do I need to pay upfront?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Yes, we take a secure card payment at the time of booking to confirm your slot. Your card is only charged once your booking is confirmed, and you will receive an email receipt immediately.</div>
+          </div>
+          <!-- Booking -->
+          <div class="faq-item" data-cat="booking">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Can I cancel or reschedule my booking?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Yes. You can cancel or reschedule any booking free of charge up to 24 hours before your scheduled visit. Cancellations within 24 hours may incur a 50% late cancellation fee. You can manage bookings directly from your account dashboard.</div>
+          </div>
+          <div class="faq-item" data-cat="booking">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              How quickly can I get a cleaner?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">In most cases, we can arrange a cleaner within 24 hours of your booking. Same-day bookings may be available depending on cleaner availability in your area. During peak periods, we recommend booking 2–3 days in advance to secure your preferred time slot.</div>
+          </div>
+          <div class="faq-item" data-cat="booking">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Can I book a recurring clean?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Yes! We offer weekly, bi-weekly, and monthly recurring bookings. Recurring customers save between 7–15% compared to one-off rates. You can pause or cancel recurring bookings anytime with no penalty as long as 24 hours notice is given.</div>
+          </div>
+          <div class="faq-item" data-cat="booking">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Do I need to be home during the clean?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">No, you don't need to be home. Many of our customers provide access instructions (e.g. key with concierge, door code) and leave their cleaner to work independently. All our cleaners are fully vetted and insured, so you can trust them in your home.</div>
+          </div>
+          <!-- Cleaners -->
+          <div class="faq-item" data-cat="cleaners">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              How do you vet your cleaners?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Every cleaner on our platform goes through a 4-stage vetting process: application review with reference checks, UK government criminal record check, in-person interview, and a practical cleaning assessment. Only 1 in 5 applicants is accepted onto the platform.</div>
+          </div>
+          <div class="faq-item" data-cat="cleaners">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Will I get the same cleaner every time?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Yes — for recurring bookings, we always aim to send the same cleaner. Your cleaner will learn your home, your preferences, and how you like things done. If your regular cleaner is unavailable, we'll notify you in advance and send a fully vetted replacement.</div>
+          </div>
+          <div class="faq-item" data-cat="cleaners">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Are your cleaners insured?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Yes, all SweepRight cleaners are covered by our comprehensive public liability insurance policy. In the unlikely event of accidental damage during a clean, please contact us within 24 hours and we will resolve the matter promptly.</div>
+          </div>
+          <!-- Supplies -->
+          <div class="faq-item" data-cat="supplies">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Do cleaners bring their own supplies?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Yes. Your cleaner will bring all necessary cleaning products and equipment, including eco-friendly cleaning supplies, mop, vacuum cleaner, and all cloths and tools. There is no additional charge for supplies — it's included in the hourly rate.</div>
+          </div>
+          <div class="faq-item" data-cat="supplies">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              Can I request specific products?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">Absolutely. If you have specific products you prefer us to use (e.g. for allergies, delicate surfaces, or eco preferences), simply leave a note in the access instructions field when booking. Your cleaner will use your preferred products if you leave them out.</div>
+          </div>
+          <!-- Quality -->
+          <div class="faq-item" data-cat="quality">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              What if I'm not happy with the clean?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">We have a 100% Satisfaction Guarantee. If you're not happy with any aspect of your clean, contact us within 24 hours and we'll send your cleaner back to fix it at no extra cost. If the issue isn't resolved, we'll offer a full refund for that visit.</div>
+          </div>
+          <div class="faq-item" data-cat="quality">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              How do I rate my cleaner?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="faq-answer">After each visit you'll receive an automated email and SMS asking you to rate your cleaner out of 5 stars. You can also leave detailed feedback. Ratings are reviewed weekly and cleaners who fall below our minimum standards are removed from the platform.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /faq -->
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" onclick="showPage('home')">
+          <div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg></div>
+          <div class="logo-text">Sweep<span>Right</span></div>
+        </div>
+        <p>The UK's most trusted home cleaning platform. Book online in 60 seconds, get a vetted cleaner at your door.</p>
+        <div class="footer-social">
+          <a title="Instagram">📸</a>
+          <a title="Facebook">👍</a>
+          <a title="TikTok">🎵</a>
+          <a title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a onclick="showPage('services')">Standard Cleaning</a></li>
+          <li><a onclick="showPage('services')">Deep Cleaning</a></li>
+          <li><a onclick="showPage('services')">Move In / Move Out</a></li>
+          <li><a onclick="showPage('services')">Office Cleaning</a></li>
+          <li><a onclick="showPage('services')">Add-Ons</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a onclick="showPage('about')">About Us</a></li>
+          <li><a onclick="showPage('pricing')">Pricing</a></li>
+          <li><a onclick="showPage('faq')">FAQ</a></li>
+          <li><a onclick="showPage('contact')">Contact</a></li>
+          <li><a>Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Areas We Cover</h4>
+        <ul>
+          <li><a>London</a></li>
+          <li><a>Anywhere in the UK</a></li>
+          <li><a>JBR &amp; Jumeirah</a></li>
+          <li><a>Business Bay</a></li>
+          <li><a>And everywhere in between</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 SweepRight. All rights reserved. UK.</p>
+      <div class="footer-bottom-links">
+        <a>Privacy Policy</a>
+        <a>Terms of Service</a>
+        <a>Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+// ── PAGE NAVIGATION ──
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-links a[id^="nav-"]').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ── BOOKING STATE ──
+const booking = {
+  size: '2 Bedroom', hrs: 4, baseRate: 45, type: 'Standard Clean',
+  freq: 'Bi-Weekly', discount: 11, extras: [], extrasTotal: 0,
+  currentStep: 1
+};
+
+function updateSummary() {
+  const rate = booking.baseRate * (1 - booking.discount / 100);
+  const base = Math.round(rate * booking.hrs);
+  const total = base + booking.extrasTotal;
+  document.getElementById('sum-size').textContent = booking.size;
+  document.getElementById('sum-type').textContent = booking.type;
+  document.getElementById('sum-hrs').textContent = booking.hrs + ' hrs';
+  document.getElementById('sum-freq').textContent = booking.freq;
+  document.getElementById('sum-total').textContent = '£' + total;
+  if (booking.extras.length > 0) {
+    document.getElementById('sum-extras-row').style.display = 'flex';
+    document.getElementById('sum-extras').textContent = booking.extras.join(', ');
+  } else {
+    document.getElementById('sum-extras-row').style.display = 'none';
+  }
+}
+
+function selectSize(el, name, hrs, price) {
+  document.querySelectorAll('.size-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  booking.size = name;
+  booking.hrs = hrs;
+  updateSummary();
+}
+
+function updateCleanType(val) {
+  const types = { standard: ['Standard Clean', 45], deep: ['Deep Clean', 65], moveout: ['Move In/Out Clean', 65] };
+  booking.type = types[val][0];
+  booking.baseRate = types[val][1];
+  updateSummary();
+}
+
+function selectFreq(el, name, discount) {
+  document.querySelectorAll('.freq-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  booking.freq = name;
+  booking.discount = discount;
+  updateSummary();
+}
+
+function toggleExtra(el, price, name) {
+  el.classList.toggle('selected');
+  if (el.classList.contains('selected')) {
+    booking.extras.push(name);
+    booking.extrasTotal += price;
+  } else {
+    booking.extras = booking.extras.filter(e => e !== name);
+    booking.extrasTotal -= price;
+  }
+  updateSummary();
+}
+
+function goBookingStep(step) {
+  for (let i = 1; i <= 6; i++) {
+    const section = document.getElementById('bs-' + i);
+    const btn = document.getElementById('bsb-' + i);
+    section.classList.toggle('active', i === step);
+    btn.classList.remove('current', 'done');
+    if (i === step) btn.classList.add('current');
+    else if (i < step) btn.classList.add('done');
+  }
+  booking.currentStep = step;
+}
+
+function confirmBooking() {
+  document.getElementById('bookingSuccess').style.display = 'block';
+  document.querySelector('#bs-6 .booking-nav-btns').style.display = 'none';
+}
+
+// ── PRICING TOGGLE ──
+let pricingRecurring = false;
+function togglePricing() {
+  pricingRecurring = !pricingRecurring;
+  const toggle = document.getElementById('pricingToggle');
+  toggle.classList.toggle('on', pricingRecurring);
+  const rates = pricingRecurring
+    ? { std: '£20', stdNote: 'Weekly · save 15%', deep: '£27', deepNote: 'Weekly · save 15%', move: '£27', moveNote: 'Weekly · save 15%' }
+    : { std: '£25', stdNote: 'One-off booking · min. 3 hrs', deep: '£32', deepNote: 'One-off booking · min. 4 hrs', move: '£32', moveNote: 'One-off booking · min. 4 hrs' };
+  document.getElementById('std-price').innerHTML = rates.std + '<span>/hr</span>';
+  document.getElementById('std-note').textContent = rates.stdNote;
+  document.getElementById('deep-price').innerHTML = rates.deep + '<span>/hr</span>';
+  document.getElementById('deep-note').textContent = rates.deepNote;
+  document.getElementById('move-price').innerHTML = rates.move + '<span>/hr</span>';
+  document.getElementById('move-note').textContent = rates.moveNote;
+}
+
+// ── FAQ ──
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+function filterFaq(cat, btn) {
+  document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+// ── CONTACT ──
+function submitContact() {
+  const msg = document.getElementById('contactSuccess');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 5000);
+}
+
+// ── SET DEFAULT BOOKING DATE ──
+window.addEventListener('DOMContentLoaded', () => {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  const dateInput = document.getElementById('bookingDate');
+  if (dateInput) dateInput.value = d.toISOString().split('T')[0];
+  updateSummary();
+});
+
+// ── INTERSECTION OBSERVER FOR ANIMATIONS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.step-card, .service-card, .trust-card, .testi-card, .pricing-card, .value-card, .cleaner-card, .addon-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
