@@ -23,9 +23,8 @@ img{max-width:100%;display:block}
 button{cursor:pointer;font-family:inherit;border:none;outline:none}
 input,textarea,select{font-family:inherit;outline:none}
 
-/* ── PAGE SYSTEM ── */
-.page{display:none;min-height:100vh;padding-top:72px}
-.page.active{display:block}
+/* ── MAIN CONTENT OFFSET (fixed nav) ── */
+main{padding-top:72px}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:72px;display:flex;align-items:center}

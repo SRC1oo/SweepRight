@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SweepRight — Book a trusted, background-checked cleaner anywhere in the UK in 60 seconds.">
+<title>FAQ | SweepRight</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html"><div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg></div><div class="logo-text">Sweep<span>Right</span></div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="faq.html" class="active">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="booking.html" class="nav-cta">Book Now</a>
+    </div>
+    <div class="burger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="booking.html" style="background:var(--primary);color:white;font-weight:700;text-align:center;border-radius:10px;margin-top:4px">Book Now</a>
+</div>
+
+<main>
+
+<div class="page-hero">
+<div class="container text-center">
+<div class="tag">FAQ</div>
+<h1>Frequently Asked Questions</h1>
+<p>Everything you need to know about SweepRight. Can't find your answer? <a href="contact.html" style="color:var(--primary);cursor:pointer;font-weight:600">Contact us.</a></p>
+</div>
+</div>
+<section class="section">
+<div class="container">
+<div class="faq-layout">
+<div class="faq-categories">
+<div class="faq-cat-btn active" onclick="filterFaq('all',this)">All Questions</div>
+<div class="faq-cat-btn" onclick="filterFaq('pricing',this)">💰 Pricing</div>
+<div class="faq-cat-btn" onclick="filterFaq('booking',this)">📅 Booking</div>
+<div class="faq-cat-btn" onclick="filterFaq('cleaners',this)">🧹 Our Cleaners</div>
+<div class="faq-cat-btn" onclick="filterFaq('supplies',this)">🧴 Supplies</div>
+<div class="faq-cat-btn" onclick="filterFaq('quality',this)">⭐ Quality</div>
+</div>
+<div class="faq-list" id="faqList">
+<!-- Pricing -->
+<div class="faq-item" data-cat="pricing">
+<div class="faq-question" onclick="toggleFaq(this)">
+              How much does a clean cost?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Our standard clean starts from £25/hr with a minimum of 3 hours. Deep cleans and move-in/out cleans start from £32/hr. Recurring bookings receive discounts of 7–15% depending on frequency. You can see full pricing on our <a href="pricing.html" style="color:var(--primary);cursor:pointer">Pricing page</a>.</div>
+</div>
+<div class="faq-item" data-cat="pricing">
+<div class="faq-question" onclick="toggleFaq(this)">
+              Are there any hidden fees?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Absolutely not. There are no booking fees, registration fees, or hidden charges. The price you see when you book is the price you pay. Cleaning supplies and equipment are included in the hourly rate.</div>
+</div>
+<div class="faq-item" data-cat="pricing">
+<div class="faq-question" onclick="toggleFaq(this)">
+              Do I need to pay upfront?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Yes, we take a secure card payment at the time of booking to confirm your slot. Your card is only charged once your booking is confirmed, and you will receive an email receipt immediately.</div>
+</div>
+<!-- Booking -->
+<div class="faq-item" data-cat="booking">
+<div class="faq-question" onclick="toggleFaq(this)">
+              Can I cancel or reschedule my booking?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Yes. You can cancel or reschedule any booking free of charge up to 24 hours before your scheduled visit. Cancellations within 24 hours may incur a 50% late cancellation fee. You can manage bookings directly from your account dashboard.</div>
+</div>
+<div class="faq-item" data-cat="booking">
+<div class="faq-question" onclick="toggleFaq(this)">
+              How quickly can I get a cleaner?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">In most cases, we can arrange a cleaner within 24 hours of your booking. Same-day bookings may be available depending on cleaner availability in your area. During peak periods, we recommend booking 2–3 days in advance to secure your preferred time slot.</div>
+</div>
+<div class="faq-item" data-cat="booking">
+<div class="faq-question" onclick="toggleFaq(this)">
+              Can I book a recurring clean?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Yes! We offer weekly, bi-weekly, and monthly recurring bookings. Recurring customers save between 7–15% compared to one-off rates. You can pause or cancel recurring bookings anytime with no penalty as long as 24 hours notice is given.</div>
+</div>
+<div class="faq-item" data-cat="booking">
+<div class="faq-question" onclick="toggleFaq(this)">
+              Do I need to be home during the clean?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">No, you don't need to be home. Many of our customers provide access instructions (e.g. key with concierge, door code) and leave their cleaner to work independently. All our cleaners are fully vetted and insured, so you can trust them in your home.</div>
+</div>
+<!-- Cleaners -->
+<div class="faq-item" data-cat="cleaners">
+<div class="faq-question" onclick="toggleFaq(this)">
+              How do you vet your cleaners?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Every cleaner on our platform goes through a 4-stage vetting process: application review with reference checks, UK government criminal record check, in-person interview, and a practical cleaning assessment. Only 1 in 5 applicants is accepted onto the platform.</div>
+</div>
+<div class="faq-item" data-cat="cleaners">
+<div class="faq-question" onclick="toggleFaq(this)">
+              Will I get the same cleaner every time?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Yes — for recurring bookings, we always aim to send the same cleaner. Your cleaner will learn your home, your preferences, and how you like things done. If your regular cleaner is unavailable, we'll notify you in advance and send a fully vetted replacement.</div>
+</div>
+<div class="faq-item" data-cat="cleaners">
+<div class="faq-question" onclick="toggleFaq(this)">
+              Are your cleaners insured?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Yes, all SweepRight cleaners are covered by our comprehensive public liability insurance policy. In the unlikely event of accidental damage during a clean, please contact us within 24 hours and we will resolve the matter promptly.</div>
+</div>
+<!-- Supplies -->
+<div class="faq-item" data-cat="supplies">
+<div class="faq-question" onclick="toggleFaq(this)">
+              Do cleaners bring their own supplies?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Yes. Your cleaner will bring all necessary cleaning products and equipment, including eco-friendly cleaning supplies, mop, vacuum cleaner, and all cloths and tools. There is no additional charge for supplies — it's included in the hourly rate.</div>
+</div>
+<div class="faq-item" data-cat="supplies">
+<div class="faq-question" onclick="toggleFaq(this)">
+              Can I request specific products?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">Absolutely. If you have specific products you prefer us to use (e.g. for allergies, delicate surfaces, or eco preferences), simply leave a note in the access instructions field when booking. Your cleaner will use your preferred products if you leave them out.</div>
+</div>
+<!-- Quality -->
+<div class="faq-item" data-cat="quality">
+<div class="faq-question" onclick="toggleFaq(this)">
+              What if I'm not happy with the clean?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">We have a 100% Satisfaction Guarantee. If you're not happy with any aspect of your clean, contact us within 24 hours and we'll send your cleaner back to fix it at no extra cost. If the issue isn't resolved, we'll offer a full refund for that visit.</div>
+</div>
+<div class="faq-item" data-cat="quality">
+<div class="faq-question" onclick="toggleFaq(this)">
+              How do I rate my cleaner?
+              <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</div>
+<div class="faq-answer">After each visit you'll receive an automated email and SMS asking you to rate your cleaner out of 5 stars. You can also leave detailed feedback. Ratings are reviewed weekly and cleaners who fall below our minimum standards are removed from the platform.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div class="logo" onclick="showPage('home')">
+<div class="logo-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"></path></svg></div>
+<div class="logo-text">Sweep<span>Right</span></div>
+</div>
+<p>The UK's most trusted home cleaning platform. Book online in 60 seconds, get a vetted cleaner at your door.</p>
+<div class="footer-social">
+<a title="Instagram">📸</a>
+<a title="Facebook">👍</a>
+<a title="TikTok">🎵</a>
+<a title="WhatsApp">💬</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Services</h4>
+<ul>
+<li><a onclick="showPage('services')">Standard Cleaning</a></li>
+<li><a onclick="showPage('services')">Deep Cleaning</a></li>
+<li><a onclick="showPage('services')">Move In / Move Out</a></li>
+<li><a onclick="showPage('services')">Office Cleaning</a></li>
+<li><a onclick="showPage('services')">Add-Ons</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<ul>
+<li><a onclick="showPage('about')">About Us</a></li>
+<li><a onclick="showPage('pricing')">Pricing</a></li>
+<li><a onclick="showPage('faq')">FAQ</a></li>
+<li><a onclick="showPage('contact')">Contact</a></li>
+<li><a>Careers</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Areas We Cover</h4>
+<ul>
+<li><a>London</a></li>
+<li><a>Anywhere in the UK</a></li>
+<li><a>JBR &amp; Jumeirah</a></li>
+<li><a>Business Bay</a></li>
+<li><a>And everywhere in between</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 SweepRight. All rights reserved. UK.</p>
+<div class="footer-bottom-links">
+<a>Privacy Policy</a>
+<a>Terms of Service</a>
+<a>Cookie Policy</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

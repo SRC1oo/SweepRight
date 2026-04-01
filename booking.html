@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SweepRight — Book a trusted, background-checked cleaner anywhere in the UK in 60 seconds.">
+<title>Book a Cleaner | SweepRight</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html"><div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg></div><div class="logo-text">Sweep<span>Right</span></div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="booking.html" class="nav-cta">Book Now</a>
+    </div>
+    <div class="burger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="booking.html" style="background:var(--primary);color:white;font-weight:700;text-align:center;border-radius:10px;margin-top:4px">Book Now</a>
+</div>
+
+<main>
+
+<div class="page-hero">
+<div class="container text-center">
+<div class="tag">Book a Cleaner</div>
+<h1>Your clean home is 60 seconds away</h1>
+<p>Fill in the details below and we'll match you with a trusted cleaner in your area.</p>
+</div>
+</div>
+<section class="section-sm">
+<div class="container">
+<div class="booking-steps-nav">
+<div class="booking-step-btn current" id="bsb-1">1. Property</div>
+<div class="booking-step-btn" id="bsb-2">2. Date &amp; Time</div>
+<div class="booking-step-btn" id="bsb-3">3. Frequency</div>
+<div class="booking-step-btn" id="bsb-4">4. Extras</div>
+<div class="booking-step-btn" id="bsb-5">5. Address</div>
+<div class="booking-step-btn" id="bsb-6">6. Payment</div>
+</div>
+<div class="booking-layout">
+<div>
+<!-- STEP 1: Property -->
+<div class="booking-form-section active" id="bs-1">
+<h3 style="margin-bottom:6px">Tell us about your property</h3>
+<p style="font-size:0.88rem;margin-bottom:24px">Select your property size and cleaning type.</p>
+<div class="form-group">
+<div class="form-label">Property Size</div>
+<div class="size-options">
+<div class="size-option" onclick="selectSize(this,'Studio',3,'£75')">
+<div class="size-icon">🏡</div>
+<div class="size-name">Studio</div>
+<div class="size-hours">~3 hrs</div>
+</div>
+<div class="size-option" onclick="selectSize(this,'1 Bedroom',3.5,'£85')">
+<div class="size-icon">🛏️</div>
+<div class="size-name">1 Bedroom</div>
+<div class="size-hours">~3.5 hrs</div>
+</div>
+<div class="size-option selected" onclick="selectSize(this,'2 Bedroom',4,'£100')">
+<div class="size-icon">🏠</div>
+<div class="size-name">2 Bedroom</div>
+<div class="size-hours">~4 hrs</div>
+</div>
+<div class="size-option" onclick="selectSize(this,'3 Bedroom',5,'£125')">
+<div class="size-icon">🏘️</div>
+<div class="size-name">3 Bedroom</div>
+<div class="size-hours">~5 hrs</div>
+</div>
+<div class="size-option" onclick="selectSize(this,'4+ Bedroom',7,'£175')">
+<div class="size-icon">🏰</div>
+<div class="size-name">4+ Bedroom</div>
+<div class="size-hours">~7 hrs</div>
+</div>
+<div class="size-option" onclick="selectSize(this,'Villa',8,'£200')">
+<div class="size-icon">🌴</div>
+<div class="size-name">Villa</div>
+<div class="size-hours">~8 hrs</div>
+</div>
+</div>
+</div>
+<div class="form-group">
+<div class="form-label">Cleaning Type</div>
+<select class="form-select" onchange="updateCleanType(this.value)">
+<option value="standard">Standard Clean — £25/hr</option>
+<option value="deep">Deep Clean — £32/hr</option>
+<option value="moveout">Move In / Move Out — £32/hr</option>
+</select>
+</div>
+<div class="booking-nav-btns" style="justify-content:flex-end">
+<button class="btn btn-primary" onclick="goBookingStep(2)">Continue →</button>
+</div>
+</div>
+<!-- STEP 2: Date & Time -->
+<div class="booking-form-section" id="bs-2">
+<h3 style="margin-bottom:6px">When would you like your clean?</h3>
+<p style="font-size:0.88rem;margin-bottom:24px">Available 7 days a week, 8am–8pm.</p>
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">Preferred Date</label>
+<input class="form-input" id="bookingDate" type="date"/>
+</div>
+<div class="form-group">
+<label class="form-label">Start Time</label>
+<select class="form-select" id="bookingTime">
+<option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option>
+<option selected="">11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option>
+<option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option>
+<option>5:00 PM</option><option>6:00 PM</option>
+</select>
+</div>
+</div>
+<div style="background:var(--primary-light);border-radius:9px;padding:14px 18px;font-size:0.85rem;color:var(--primary-dark);margin-top:4px">
+              💡 <strong>Tip:</strong> Booking before 10am gives you the best cleaner availability for same-day or next-day slots.
+            </div>
+<div class="booking-nav-btns">
+<button class="btn btn-outline" onclick="goBookingStep(1)">← Back</button>
+<button class="btn btn-primary" onclick="goBookingStep(3)">Continue →</button>
+</div>
+</div>
+<!-- STEP 3: Frequency -->
+<div class="booking-form-section" id="bs-3">
+<h3 style="margin-bottom:6px">How often would you like us?</h3>
+<p style="font-size:0.88rem;margin-bottom:24px">Recurring bookings save money and give you the same cleaner every time.</p>
+<div class="freq-options">
+<div class="freq-option" onclick="selectFreq(this,'One-off',0)">
+<div class="freq-option-left">
+<div class="freq-option-name">One-off</div>
+<div class="freq-option-note">A single visit, no commitment</div>
+</div>
+<div class="freq-option-price">£25/hr</div>
+</div>
+<div class="freq-option" onclick="selectFreq(this,'Monthly',7)">
+<div class="freq-option-left">
+<div class="freq-option-name">Monthly</div>
+<div class="freq-option-note">Once a month · save 7%</div>
+</div>
+<div class="freq-option-price">£22/hr</div>
+</div>
+<div class="freq-option selected" onclick="selectFreq(this,'Bi-Weekly',11)">
+<div class="freq-option-left">
+<div class="freq-option-name">Every Two Weeks</div>
+<div class="freq-option-note">Bi-weekly · save 11%</div>
+</div>
+<div class="freq-option-price">£21/hr</div>
+</div>
+<div class="freq-option" onclick="selectFreq(this,'Weekly',15)">
+<div class="freq-option-left">
+<div class="freq-option-name">Every Week ⭐</div>
+<div class="freq-option-note">Weekly · best value · save 15%</div>
+</div>
+<div class="freq-option-price">£20/hr</div>
+</div>
+</div>
+<div class="booking-nav-btns">
+<button class="btn btn-outline" onclick="goBookingStep(2)">← Back</button>
+<button class="btn btn-primary" onclick="goBookingStep(4)">Continue →</button>
+</div>
+</div>
+<!-- STEP 4: Extras -->
+<div class="booking-form-section" id="bs-4">
+<h3 style="margin-bottom:6px">Add any extras</h3>
+<p style="font-size:0.88rem;margin-bottom:24px">Optional add-ons to customise your clean.</p>
+<div class="extras-grid">
+<div class="extra-option" onclick="toggleExtra(this,30,'Ironing')"><div class="extra-emoji">👔</div><div class="extra-info"><div class="extra-name">Ironing</div><div class="extra-price">+ £15</div></div></div>
+<div class="extra-option" onclick="toggleExtra(this,25,'Laundry')"><div class="extra-emoji">🧺</div><div class="extra-info"><div class="extra-name">Laundry</div><div class="extra-price">+ £12</div></div></div>
+<div class="extra-option" onclick="toggleExtra(this,40,'Inside Fridge')"><div class="extra-emoji">🧊</div><div class="extra-info"><div class="extra-name">Inside Fridge</div><div class="extra-price">+ £20</div></div></div>
+<div class="extra-option" onclick="toggleExtra(this,45,'Inside Oven')"><div class="extra-emoji">🍳</div><div class="extra-info"><div class="extra-name">Inside Oven</div><div class="extra-price">+ £22</div></div></div>
+<div class="extra-option" onclick="toggleExtra(this,35,'Interior Windows')"><div class="extra-emoji">🪟</div><div class="extra-info"><div class="extra-name">Interior Windows</div><div class="extra-price">+ £18</div></div></div>
+<div class="extra-option" onclick="toggleExtra(this,30,'Balcony Clean')"><div class="extra-emoji">🌅</div><div class="extra-info"><div class="extra-name">Balcony Clean</div><div class="extra-price">+ £15</div></div></div>
+</div>
+<div class="booking-nav-btns">
+<button class="btn btn-outline" onclick="goBookingStep(3)">← Back</button>
+<button class="btn btn-primary" onclick="goBookingStep(5)">Continue →</button>
+</div>
+</div>
+<!-- STEP 5: Address -->
+<div class="booking-form-section" id="bs-5">
+<h3 style="margin-bottom:6px">Where should we send your cleaner?</h3>
+<p style="font-size:0.88rem;margin-bottom:24px">Your address is kept private and only shared with your assigned cleaner.</p>
+<div class="form-group">
+<label class="form-label">Area / District</label>
+<select class="form-select">
+<option>London — Central</option><option>London — North</option><option>London — South</option>
+<option>London — East</option><option>London — West</option><option>Manchester</option>
+<option>Birmingham</option><option>Leeds</option><option>Bristol</option>
+<option>Edinburgh</option><option>Liverpool</option><option>Other</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label">Apartment / Villa Number</label>
+<input class="form-input" placeholder="e.g. Apt 1204, Tower B" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label">Building / Street Name</label>
+<input class="form-input" placeholder="e.g. Marina Gate 2" type="text"/>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">Your Name</label>
+<input class="form-input" placeholder="Full name" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label">Phone Number</label>
+<input class="form-input" placeholder="+44 7000 000000" type="tel"/>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">Email Address</label>
+<input class="form-input" placeholder="you@example.com" type="email"/>
+</div>
+<div class="form-group">
+<label class="form-label">Access Instructions (optional)</label>
+<input class="form-input" placeholder="e.g. Key with concierge, buzzer code: 1234" type="text"/>
+</div>
+<div class="booking-nav-btns">
+<button class="btn btn-outline" onclick="goBookingStep(4)">← Back</button>
+<button class="btn btn-primary" onclick="goBookingStep(6)">Continue →</button>
+</div>
+</div>
+<!-- STEP 6: Payment -->
+<div class="booking-form-section" id="bs-6">
+<h3 style="margin-bottom:6px">Secure Payment</h3>
+<p style="font-size:0.88rem;margin-bottom:24px">Your payment is encrypted and secure. You won't be charged until your booking is confirmed.</p>
+<div style="background:#f9fafb;border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-mid)">
+              🔒 <strong>SSL Secured</strong> — 256-bit encryption. We accept Visa, Mastercard, and Apple Pay.
+            </div>
+<div class="form-group">
+<label class="form-label">Cardholder Name</label>
+<input class="form-input" placeholder="Name on card" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label">Card Number</label>
+<input class="form-input" maxlength="19" placeholder="1234 5678 9012 3456" type="text"/>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">Expiry Date</label>
+<input class="form-input" maxlength="7" placeholder="MM / YY" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label">CVV</label>
+<input class="form-input" maxlength="4" placeholder="•••" type="text"/>
+</div>
+</div>
+<div class="form-group" style="display:flex;align-items:flex-start;gap:10px;margin-top:4px">
+<input id="termsCheck" style="margin-top:3px;accent-color:var(--primary);width:16px;height:16px;flex-shrink:0" type="checkbox"/>
+<label for="termsCheck" style="font-size:0.85rem;color:var(--text-mid);cursor:pointer">I agree to the <a href="#" style="color:var(--primary)">Terms &amp; Conditions</a> and <a href="#" style="color:var(--primary)">Privacy Policy</a>. I understand I can cancel or reschedule up to 24 hours before my booking for free.</label>
+</div>
+<div class="booking-nav-btns">
+<button class="btn btn-outline" onclick="goBookingStep(5)">← Back</button>
+<button class="btn btn-primary btn-lg" onclick="confirmBooking()" style="flex:1">Confirm &amp; Pay</button>
+</div>
+<!-- Success state -->
+<div id="bookingSuccess" style="display:none;background:var(--primary-light);border:1px solid var(--primary);border-radius:12px;padding:24px;margin-top:20px;text-align:center">
+<div style="font-size:2.5rem;margin-bottom:12px">🎉</div>
+<h3 style="color:var(--primary-dark);margin-bottom:8px">Booking Confirmed!</h3>
+<p style="font-size:0.9rem;color:var(--text-mid)">We've received your booking and will send a confirmation to your email. Your cleaner will contact you 1 hour before arrival.</p>
+</div>
+</div>
+</div>
+<!-- SUMMARY SIDEBAR -->
+<div class="booking-summary">
+<h3>Booking Summary</h3>
+<div class="summary-line"><span>Property</span><strong id="sum-size">2 Bedroom</strong></div>
+<div class="summary-line"><span>Clean Type</span><strong id="sum-type">Standard Clean</strong></div>
+<div class="summary-line"><span>Duration</span><strong id="sum-hrs">4 hrs</strong></div>
+<div class="summary-line"><span>Frequency</span><strong id="sum-freq">Bi-Weekly</strong></div>
+<div class="summary-line" id="sum-extras-row" style="display:none"><span>Extras</span><strong id="sum-extras">—</strong></div>
+<div class="summary-total">
+<div class="label">Total</div>
+<div class="price" id="sum-total">£100</div>
+</div>
+<div class="summary-note">Per visit · no hidden fees</div>
+<div class="trust-row-sm">
+<div class="trust-row-sm-item" style="--before:''">🔒 Secure payment processing</div>
+<div class="trust-row-sm-item">✅ Free cancellation · 24h notice</div>
+<div class="trust-row-sm-item">🧹 Background-checked cleaners</div>
+<div class="trust-row-sm-item">⭐ Satisfaction guarantee</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div class="logo" onclick="showPage('home')">
+<div class="logo-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"></path></svg></div>
+<div class="logo-text">Sweep<span>Right</span></div>
+</div>
+<p>The UK's most trusted home cleaning platform. Book online in 60 seconds, get a vetted cleaner at your door.</p>
+<div class="footer-social">
+<a title="Instagram">📸</a>
+<a title="Facebook">👍</a>
+<a title="TikTok">🎵</a>
+<a title="WhatsApp">💬</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Services</h4>
+<ul>
+<li><a onclick="showPage('services')">Standard Cleaning</a></li>
+<li><a onclick="showPage('services')">Deep Cleaning</a></li>
+<li><a onclick="showPage('services')">Move In / Move Out</a></li>
+<li><a onclick="showPage('services')">Office Cleaning</a></li>
+<li><a onclick="showPage('services')">Add-Ons</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<ul>
+<li><a onclick="showPage('about')">About Us</a></li>
+<li><a onclick="showPage('pricing')">Pricing</a></li>
+<li><a onclick="showPage('faq')">FAQ</a></li>
+<li><a onclick="showPage('contact')">Contact</a></li>
+<li><a>Careers</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Areas We Cover</h4>
+<ul>
+<li><a>London</a></li>
+<li><a>Anywhere in the UK</a></li>
+<li><a>JBR &amp; Jumeirah</a></li>
+<li><a>Business Bay</a></li>
+<li><a>And everywhere in between</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 SweepRight. All rights reserved. UK.</p>
+<div class="footer-bottom-links">
+<a>Privacy Policy</a>
+<a>Terms of Service</a>
+<a>Cookie Policy</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

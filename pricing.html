@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SweepRight — Book a trusted, background-checked cleaner anywhere in the UK in 60 seconds.">
+<title>Pricing | SweepRight</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html"><div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg></div><div class="logo-text">Sweep<span>Right</span></div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html" class="active">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="booking.html" class="nav-cta">Book Now</a>
+    </div>
+    <div class="burger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="booking.html" style="background:var(--primary);color:white;font-weight:700;text-align:center;border-radius:10px;margin-top:4px">Book Now</a>
+</div>
+
+<main>
+
+<div class="page-hero">
+<div class="container">
+<div class="tag">Pricing</div>
+<h1>Transparent, honest pricing</h1>
+<p>No hidden fees. No surprises. Pay only for the time you need, with discounts for regular bookings.</p>
+<div class="pricing-toggle">
+<span>One-off</span>
+<div class="toggle-switch" id="pricingToggle" onclick="togglePricing()"><div class="toggle-knob"></div></div>
+<span>Recurring</span>
+<span class="save-badge">Save up to 20%</span>
+</div>
+</div>
+</div>
+<section class="section">
+<div class="container">
+<div class="pricing-cards">
+<div class="pricing-card">
+<h3>Standard Clean</h3>
+<div class="pricing-card-sub">For regular home upkeep</div>
+<div class="pricing-amount" id="std-price">£25<span>/hr</span></div>
+<div class="pricing-freq" id="std-note">One-off booking · min. 3 hrs</div>
+<ul class="pricing-features">
+<li>All rooms vacuumed &amp; mopped</li>
+<li>Kitchen &amp; bathrooms cleaned</li>
+<li>Surfaces dusted</li>
+<li>Bins emptied</li>
+<li>Beds changed (linen provided)</li>
+<li>Same cleaner on recurring visits</li>
+</ul>
+<button class="btn btn-outline" onclick="window.location.href='booking.html'" style="width:100%">Book Standard Clean</button>
+</div>
+<div class="pricing-card popular">
+<div class="pricing-popular-badge">⭐ Most Popular</div>
+<h3>Deep Clean</h3>
+<div class="pricing-card-sub">For a thorough top-to-bottom refresh</div>
+<div class="pricing-amount" id="deep-price">£32<span>/hr</span></div>
+<div class="pricing-freq" id="deep-note">One-off booking · min. 4 hrs</div>
+<ul class="pricing-features">
+<li>Everything in Standard, plus:</li>
+<li>Inside cabinets &amp; appliances</li>
+<li>Skirting boards &amp; door frames</li>
+<li>Window sills &amp; tracks</li>
+<li>Behind &amp; under appliances</li>
+<li>Bathroom grout scrubbing</li>
+</ul>
+<button class="btn btn-primary" onclick="window.location.href='booking.html'" style="width:100%">Book Deep Clean</button>
+</div>
+<div class="pricing-card">
+<h3>Move In/Out Clean</h3>
+<div class="pricing-card-sub">Deposit-ready, landlord approved</div>
+<div class="pricing-amount" id="move-price">£32<span>/hr</span></div>
+<div class="pricing-freq" id="move-note">One-off booking · min. 4 hrs</div>
+<ul class="pricing-features">
+<li>Full property deep clean</li>
+<li>Inside all appliances</li>
+<li>All cupboards emptied &amp; cleaned</li>
+<li>Windows cleaned inside</li>
+<li>Walls spot-cleaned</li>
+<li>Landlord checklist followed</li>
+</ul>
+<button class="btn btn-outline" onclick="window.location.href='booking.html'" style="width:100%">Book Move Clean</button>
+</div>
+</div>
+<!-- EXAMPLE SCENARIOS -->
+<div class="pricing-scenarios">
+<div class="text-center">
+<div class="tag">Example Pricing</div>
+<h2>What does it cost for my home?</h2>
+<p style="margin-top:8px;max-width:500px;margin-left:auto;margin-right:auto">Estimated prices for a standard weekly clean. Actual time may vary based on condition and add-ons selected.</p>
+</div>
+<div class="scenario-grid">
+<div class="scenario-card">
+<div class="scenario-icon">🏡</div>
+<div class="scenario-label">Studio Apartment</div>
+<div class="scenario-price">£75</div>
+<div class="scenario-note">3 hrs · weekly rate</div>
+</div>
+<div class="scenario-card">
+<div class="scenario-icon">🛏️</div>
+<div class="scenario-label">1 Bedroom</div>
+<div class="scenario-price">£85</div>
+<div class="scenario-note">3.4 hrs · weekly rate</div>
+</div>
+<div class="scenario-card">
+<div class="scenario-icon">🏠</div>
+<div class="scenario-label">2 Bedroom</div>
+<div class="scenario-price">£100</div>
+<div class="scenario-note">4.2 hrs · weekly rate</div>
+</div>
+<div class="scenario-card">
+<div class="scenario-icon">🏘️</div>
+<div class="scenario-label">3 Bedroom Villa</div>
+<div class="scenario-price">£150</div>
+<div class="scenario-note">6 hrs · weekly rate</div>
+</div>
+</div>
+<div class="no-hidden">
+<div class="no-hidden-icon">💛</div>
+<div>
+<h3>No hidden fees — ever</h3>
+<p>The price you see is the price you pay. No registration fees, no booking fees, no surprise charges. Supplies and equipment are included. You can cancel or reschedule up to 24 hours before your booking at no cost.</p>
+</div>
+</div>
+</div>
+<!-- FREQUENCY DISCOUNT TABLE -->
+<div style="margin-top:64px">
+<div class="text-center">
+<div class="tag">Frequency Discounts</div>
+<h2>The more often, the less you pay</h2>
+</div>
+<div style="margin-top:32px;overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+<thead>
+<tr style="background:var(--primary);color:white;text-align:left">
+<th style="padding:14px 20px;border-radius:10px 0 0 0">Frequency</th>
+<th style="padding:14px 20px">Standard Rate</th>
+<th style="padding:14px 20px">Your Rate</th>
+<th style="padding:14px 20px;border-radius:0 10px 0 0">You Save</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid var(--border)">
+<td style="padding:14px 20px;font-weight:600">One-off</td>
+<td style="padding:14px 20px;color:var(--text-mid)">£25/hr</td>
+<td style="padding:14px 20px;font-weight:600">£25/hr</td>
+<td style="padding:14px 20px;color:var(--text-light)">—</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);background:#fafafa">
+<td style="padding:14px 20px;font-weight:600">Monthly</td>
+<td style="padding:14px 20px;color:var(--text-mid)">£25/hr</td>
+<td style="padding:14px 20px;font-weight:600;color:var(--primary-dark)">£22/hr</td>
+<td style="padding:14px 20px;color:#059669;font-weight:600">Save 7%</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border)">
+<td style="padding:14px 20px;font-weight:600">Bi-Weekly</td>
+<td style="padding:14px 20px;color:var(--text-mid)">£25/hr</td>
+<td style="padding:14px 20px;font-weight:600;color:var(--primary-dark)">£21/hr</td>
+<td style="padding:14px 20px;color:#059669;font-weight:600">Save 11%</td>
+</tr>
+<tr style="background:var(--primary-light)">
+<td style="padding:14px 20px;font-weight:700">Weekly</td>
+<td style="padding:14px 20px;color:var(--text-mid)">£25/hr</td>
+<td style="padding:14px 20px;font-weight:700;color:var(--primary-dark)">£20/hr</td>
+<td style="padding:14px 20px;color:#059669;font-weight:700">Save 15% 🎉</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div class="logo" onclick="showPage('home')">
+<div class="logo-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"></path></svg></div>
+<div class="logo-text">Sweep<span>Right</span></div>
+</div>
+<p>The UK's most trusted home cleaning platform. Book online in 60 seconds, get a vetted cleaner at your door.</p>
+<div class="footer-social">
+<a title="Instagram">📸</a>
+<a title="Facebook">👍</a>
+<a title="TikTok">🎵</a>
+<a title="WhatsApp">💬</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Services</h4>
+<ul>
+<li><a onclick="showPage('services')">Standard Cleaning</a></li>
+<li><a onclick="showPage('services')">Deep Cleaning</a></li>
+<li><a onclick="showPage('services')">Move In / Move Out</a></li>
+<li><a onclick="showPage('services')">Office Cleaning</a></li>
+<li><a onclick="showPage('services')">Add-Ons</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Company</h4>
+<ul>
+<li><a onclick="showPage('about')">About Us</a></li>
+<li><a onclick="showPage('pricing')">Pricing</a></li>
+<li><a onclick="showPage('faq')">FAQ</a></li>
+<li><a onclick="showPage('contact')">Contact</a></li>
+<li><a>Careers</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Areas We Cover</h4>
+<ul>
+<li><a>London</a></li>
+<li><a>Anywhere in the UK</a></li>
+<li><a>JBR &amp; Jumeirah</a></li>
+<li><a>Business Bay</a></li>
+<li><a>And everywhere in between</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 SweepRight. All rights reserved. UK.</p>
+<div class="footer-bottom-links">
+<a>Privacy Policy</a>
+<a>Terms of Service</a>
+<a>Cookie Policy</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
