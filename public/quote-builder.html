@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Builder — SweepRight</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="quote-builder.css">
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg>
+        </div>
+        <div>
+          <div class="header-title">SweepRight <span>Quote Builder</span></div>
+          <div class="header-sub">Commercial · Internal Tool</div>
+        </div>
+      </div>
+      <div class="view-toggle">
+        <button class="view-btn active" id="btnSales" onclick="setView('sales')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+          Sales View
+        </button>
+        <button class="view-btn" id="btnOwner" onclick="setView('owner')">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+          Owner View
+        </button>
+      </div>
+      <button class="reset-btn" onclick="resetAll()">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/></svg>
+        Reset
+      </button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="layout">
+
+      <!-- ════════════════════════════════
+           LEFT COLUMN — INPUTS
+      ════════════════════════════════ -->
+      <div class="inputs-col">
+
+        <!-- §1 COMPANY DETAILS -->
+        <section class="card">
+          <div class="sec-header">
+            <div class="sec-num">1</div>
+            <div class="sec-title">Company Details</div>
+          </div>
+          <div class="sec-body">
+            <div class="field-row">
+              <div class="field">
+                <label>Company Name</label>
+                <input type="text" id="companyName" placeholder="e.g. Apex Offices Ltd" oninput="calculate()">
+              </div>
+              <div class="field">
+                <label>Contact Name</label>
+                <input type="text" id="contactName" placeholder="e.g. James Miller" oninput="calculate()">
+              </div>
+            </div>
+            <div class="field">
+              <label>Location</label>
+              <input type="text" id="location" placeholder="e.g. Manchester City Centre" oninput="calculate()">
+            </div>
+          </div>
+        </section>
+
+        <!-- §2 PROPERTY DETAILS -->
+        <section class="card">
+          <div class="sec-header">
+            <div class="sec-num">2</div>
+            <div class="sec-title">Property Details</div>
+          </div>
+          <div class="sec-body">
+            <div class="field">
+              <label>Property Type</label>
+              <div class="property-grid">
+                <div class="prop-option selected" data-type="office"       data-rate="30" onclick="selectProp(this)"><div class="prop-icon">🏢</div><div class="prop-name">Office</div><div class="prop-rate">£30/hr</div></div>
+                <div class="prop-option"          data-type="gym"          data-rate="35" onclick="selectProp(this)"><div class="prop-icon">🏋️</div><div class="prop-name">Gym</div><div class="prop-rate">£35/hr</div></div>
+                <div class="prop-option"          data-type="salon"        data-rate="27" onclick="selectProp(this)"><div class="prop-icon">✂️</div><div class="prop-name">Salon / Barber</div><div class="prop-rate">£27/hr</div></div>
+                <div class="prop-option"          data-type="restaurant"   data-rate="38" onclick="selectProp(this)"><div class="prop-icon">🍽️</div><div class="prop-name">Restaurant</div><div class="prop-rate">£38/hr</div></div>
+                <div class="prop-option"          data-type="medical"      data-rate="40" onclick="selectProp(this)"><div class="prop-icon">🏥</div><div class="prop-name">Medical</div><div class="prop-rate">£40/hr</div></div>
+                <div class="prop-option"          data-type="retail"       data-rate="28" onclick="selectProp(this)"><div class="prop-icon">🛍️</div><div class="prop-name">Retail</div><div class="prop-rate">£28/hr</div></div>
+                <div class="prop-option"          data-type="warehouse"    data-rate="27" onclick="selectProp(this)"><div class="prop-icon">🏭</div><div class="prop-name">Warehouse</div><div class="prop-rate">£27/hr</div></div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Square Footage (sq ft)</label>
+              <input type="number" id="sqft" value="1500" min="100" step="100" oninput="updateRecommendation(); calculate()">
+              <div class="recommendation-bar" id="recommendationBar">
+                <div class="rec-icon">💡</div>
+                <div class="rec-text" id="recText">Recommended: 1–2 cleaners for 3–5 hours</div>
+                <button class="rec-apply-btn" onclick="applyRecommendation()">Apply</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §3 JOB SETUP -->
+        <section class="card">
+          <div class="sec-header">
+            <div class="sec-num">3</div>
+            <div class="sec-title">Job Setup</div>
+          </div>
+          <div class="sec-body">
+            <div class="field-row">
+              <div class="field">
+                <label>Number of Cleaners</label>
+                <div class="stepper">
+                  <button class="step-btn" onclick="stepField('cleaners',-1)">−</button>
+                  <input type="number" id="cleaners" value="2" min="1" max="20" onchange="calculate()">
+                  <button class="step-btn" onclick="stepField('cleaners',1)">+</button>
+                </div>
+              </div>
+              <div class="field">
+                <label>Hours per Visit</label>
+                <div class="stepper">
+                  <button class="step-btn" onclick="stepField('hours',-0.5)">−</button>
+                  <input type="number" id="hours" value="4" min="1" max="24" step="0.5" onchange="calculate()">
+                  <button class="step-btn" onclick="stepField('hours',0.5)">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Man-Hours / Visit</label>
+              <div class="manhours-display" id="manhoursDisplay">8 man-hrs</div>
+            </div>
+            <div class="field">
+              <label>Frequency</label>
+              <div class="freq-options">
+                <div class="freq-opt selected" data-freq="one-off"  data-discount="0"  data-vpw="0" onclick="selectFreq(this)"><div class="freq-name">One-off</div><div class="freq-disc">No discount</div></div>
+                <div class="freq-opt"          data-freq="weekly"   data-discount="10" data-vpw="1" onclick="selectFreq(this)"><div class="freq-name">Weekly</div><div class="freq-disc">−10%</div></div>
+                <div class="freq-opt"          data-freq="2xweekly" data-discount="12" data-vpw="2" onclick="selectFreq(this)"><div class="freq-name">2× Weekly</div><div class="freq-disc">−12%</div></div>
+                <div class="freq-opt"          data-freq="daily"    data-discount="15" data-vpw="5" onclick="selectFreq(this)"><div class="freq-name">Daily</div><div class="freq-disc">−15%</div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §4 CLEAN TYPE -->
+        <section class="card">
+          <div class="sec-header">
+            <div class="sec-num">4</div>
+            <div class="sec-title">Clean Type</div>
+          </div>
+          <div class="sec-body">
+            <div class="clean-options">
+              <div class="clean-opt selected" data-add="0"  onclick="selectClean(this)"><div class="clean-name">Standard</div><div class="clean-desc">Regular maintenance clean</div><div class="clean-price">No premium</div></div>
+              <div class="clean-opt"          data-add="8"  onclick="selectClean(this)"><div class="clean-name">Deep Clean</div><div class="clean-desc">Thorough top-to-bottom</div><div class="clean-price">+£8/hr</div></div>
+              <div class="clean-opt"          data-add="15" onclick="selectClean(this)"><div class="clean-name">Post-Construction</div><div class="clean-desc">Builders clean, debris removal</div><div class="clean-price">+£15/hr</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §5 EQUIPMENT & SUPPLIES -->
+        <section class="card">
+          <div class="sec-header">
+            <div class="sec-num">5</div>
+            <div class="sec-title">Equipment &amp; Supplies</div>
+          </div>
+          <div class="sec-body">
+            <div class="field">
+              <label>Equipment</label>
+              <div class="toggle-pair">
+                <div class="pair-opt selected" data-val="0" onclick="selectPair(this,'equip')">Client provides</div>
+                <div class="pair-opt"          data-val="3" onclick="selectPair(this,'equip')">We provide <span class="pair-tag">+£3/hr</span></div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Consumables / Supplies</label>
+              <div class="toggle-pair">
+                <div class="pair-opt selected" data-val="0"  onclick="selectPair(this,'supplies')">Client provides</div>
+                <div class="pair-opt"          data-val="20" onclick="selectPair(this,'supplies')">We provide <span class="pair-tag">+£20/visit</span></div>
+              </div>
+            </div>
+            <div class="field" id="suppliesCustomRow" style="display:none">
+              <label>Supplies cost per visit (£)</label>
+              <input type="number" id="suppliesCostInput" value="20" min="0" step="5" onchange="calculate()">
+            </div>
+            <div class="field">
+              <label>Out-of-Hours / Evening / Weekend</label>
+              <div class="toggle-pair">
+                <div class="pair-opt selected" data-val="0" onclick="selectPair(this,'ooh')">Standard hours</div>
+                <div class="pair-opt"          data-val="4" onclick="selectPair(this,'ooh')">Out-of-hours <span class="pair-tag">+£4/hr</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §6 JOB CONDITION -->
+        <section class="card">
+          <div class="sec-header">
+            <div class="sec-num">6</div>
+            <div class="sec-title">Job Condition</div>
+          </div>
+          <div class="sec-body">
+            <div class="condition-options">
+              <div class="cond-opt selected" data-mult="1.00" onclick="selectCond(this)"><div class="cond-icon">✅</div><div class="cond-name">Standard</div><div class="cond-note">Normal condition</div></div>
+              <div class="cond-opt"          data-mult="1.10" onclick="selectCond(this)"><div class="cond-icon">⚡</div><div class="cond-name">High Traffic</div><div class="cond-note">+10% to rate</div></div>
+              <div class="cond-opt"          data-mult="1.20" onclick="selectCond(this)"><div class="cond-icon">⚠️</div><div class="cond-name">Poor Condition</div><div class="cond-note">+20% to rate</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §7 URGENCY -->
+        <section class="card">
+          <div class="sec-header">
+            <div class="sec-num">7</div>
+            <div class="sec-title">Urgency</div>
+          </div>
+          <div class="sec-body">
+            <div class="urgency-options">
+              <div class="urg-opt selected" data-mult="1.00" onclick="selectUrg(this)"><div class="urg-name">Standard</div><div class="urg-note">Normal scheduling</div></div>
+              <div class="urg-opt"          data-mult="1.10" onclick="selectUrg(this)"><div class="urg-icon">🚨</div><div class="urg-name">Urgent</div><div class="urg-note">+10% — within 48 hrs</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- §8 ADD-ONS -->
+        <section class="card">
+          <div class="sec-header">
+            <div class="sec-num">8</div>
+            <div class="sec-title">Add-ons &amp; Extras</div>
+          </div>
+          <div class="sec-body">
+
+            <!-- Recommended add-ons banner -->
+            <div class="rec-addons-bar" id="recAddonsBar" style="display:none">
+              <div class="rec-icon">⭐</div>
+              <div>
+                <div class="rec-addons-title" id="recAddonsTitle">Recommended for this property</div>
+                <div class="rec-addons-list" id="recAddonsList"></div>
+              </div>
+            </div>
+
+            <div class="addon-group-label">Per Visit Add-ons</div>
+            <div class="addons-grid" id="addonsGrid">
+              <!-- Rendered by JS from ADDON_CONFIG -->
+            </div>
+
+            <div class="addon-group-label" style="margin-top:14px">Custom Add-on</div>
+            <div class="custom-addon-row">
+              <input type="text"   id="customAddonName"  placeholder="Add-on name" oninput="calculate()">
+              <input type="number" id="customAddonValue" placeholder="£ value" min="0" step="5" onchange="calculate()">
+              <button class="custom-addon-add" onclick="applyCustomAddon()">Add</button>
+            </div>
+            <div id="customAddonsList" class="custom-addons-list"></div>
+          </div>
+        </section>
+
+        <!-- §9 OWNER SETTINGS (owner view only) -->
+        <section class="card owner-only" id="ownerSettings">
+          <div class="sec-header">
+            <div class="sec-num" style="background:linear-gradient(135deg,#7C3AED,#5B21B6)">⚙</div>
+            <div class="sec-title">Owner Settings</div>
+            <div class="owner-badge">Owner View</div>
+          </div>
+          <div class="sec-body">
+            <div class="field-row">
+              <div class="field">
+                <label>Cleaner / Worker Cost (£/hr)</label>
+                <input type="number" id="cleanerRate" value="15" min="8" max="50" step="0.5" onchange="calculate()">
+              </div>
+              <div class="field">
+                <label>Overhead Rate (%)</label>
+                <input type="number" id="overheadPct" value="10" min="0" max="50" step="1" onchange="calculate()">
+              </div>
+            </div>
+            <div class="field">
+              <label>Gross Margin Target (%)</label>
+              <input type="number" id="marginTarget" value="30" min="5" max="70" step="1" onchange="calculate()">
+            </div>
+            <div class="owner-divider">Sales Commission Rates</div>
+            <div class="field-row">
+              <div class="field">
+                <label>One-off Commission (%)</label>
+                <input type="number" id="commOneOff" value="15" min="0" max="50" step="1" onchange="calculate()">
+              </div>
+              <div class="field">
+                <label>Contract Month 1 (%)</label>
+                <input type="number" id="commM1" value="15" min="0" max="50" step="1" onchange="calculate()">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>Contract Month 2 (%)</label>
+                <input type="number" id="commM2" value="15" min="0" max="50" step="1" onchange="calculate()">
+              </div>
+              <div class="field">
+                <label>Contract Month 3 (%)</label>
+                <input type="number" id="commM3" value="10" min="0" max="50" step="1" onchange="calculate()">
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <!-- /inputs-col -->
+
+      <!-- ════════════════════════════════
+           RIGHT COLUMN — OUTPUT
+      ════════════════════════════════ -->
+      <div class="output-col">
+
+        <!-- PRICE HERO -->
+        <div class="price-hero">
+          <div class="price-hero-inner">
+            <div class="price-block">
+              <div class="price-label">Per Visit</div>
+              <div class="price-big" id="pricePerVisit">£—</div>
+            </div>
+            <div class="price-divider"></div>
+            <div class="price-block">
+              <div class="price-label">Per Month</div>
+              <div class="price-big" id="pricePerMonth">£—</div>
+              <div class="price-sub" id="priceMonthSub"></div>
+            </div>
+            <div class="price-divider"></div>
+            <div class="price-block">
+              <div class="price-label">Hourly Rate</div>
+              <div class="price-big price-sm" id="priceHourly">£—/hr</div>
+            </div>
+          </div>
+          <div class="min-job-badge" id="minJobBadge" style="display:none">⚠️ Minimum job value of £100 applied</div>
+        </div>
+
+        <!-- SALES COMMISSION CARD (both views) -->
+        <section class="card output-card comm-card">
+          <div class="sec-header">
+            <div class="sec-icon">💼</div>
+            <div class="sec-title">Agent Commission</div>
+            <div class="comm-live-badge">Live</div>
+          </div>
+          <div class="comm-body" id="commBody">
+            <div class="comm-row" id="commOneOffRow">
+              <span>One-off commission</span>
+              <strong id="commOneOffAmt">—</strong>
+            </div>
+            <div id="commContractRows" style="display:none">
+              <div class="comm-row">
+                <span>Month 1 commission</span>
+                <strong id="commM1Amt">—</strong>
+              </div>
+              <div class="comm-row">
+                <span>Month 2 commission</span>
+                <strong id="commM2Amt">—</strong>
+              </div>
+              <div class="comm-row">
+                <span>Month 3 commission</span>
+                <strong id="commM3Amt">—</strong>
+              </div>
+              <div class="comm-row comm-total">
+                <span>Total 3-month commission</span>
+                <strong id="commTotalAmt">—</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RATE BREAKDOWN -->
+        <section class="card output-card">
+          <div class="sec-header">
+            <div class="sec-icon">💷</div>
+            <div class="sec-title">Rate Breakdown</div>
+          </div>
+          <div class="breakdown-table">
+            <div class="bk-row"><span>Base rate</span><span id="bk-base" class="bk-val">—</span></div>
+            <div class="bk-row" id="bkrow-clean"  style="display:none"><span id="bk-clean-label">Clean type premium</span><span id="bk-clean" class="bk-val bk-add">—</span></div>
+            <div class="bk-row" id="bkrow-ooh"    style="display:none"><span>Out-of-hours premium</span><span class="bk-val bk-add">+£4.00/hr</span></div>
+            <div class="bk-row" id="bkrow-equip"  style="display:none"><span>Equipment premium</span><span class="bk-val bk-add">+£3.00/hr</span></div>
+            <div class="bk-row" id="bkrow-cond"   style="display:none"><span id="bk-cond-label">Condition uplift</span><span id="bk-cond" class="bk-val bk-add">—</span></div>
+            <div class="bk-row" id="bkrow-urg"    style="display:none"><span>Urgency uplift (+10%)</span><span id="bk-urg" class="bk-val bk-add">—</span></div>
+            <div class="bk-row bk-subtotal"><span>Adjusted hourly rate</span><span id="bk-adjusted" class="bk-val">—</span></div>
+            <div class="bk-row" id="bkrow-disc"   style="display:none"><span id="bk-disc-label">Frequency discount</span><span id="bk-disc" class="bk-val bk-sub">—</span></div>
+            <div class="bk-row"><span>10% buffer (auto-applied)</span><span id="bk-buffer" class="bk-val bk-add">—</span></div>
+            <div class="bk-row bk-total"><span>Final client hourly rate</span><span id="bk-final" class="bk-val bk-final">—</span></div>
+            <!-- Per-visit flat additions -->
+            <div class="bk-row bk-flat-header" id="bkrow-flats-header" style="display:none">
+              <span style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-light)">Per-visit additions</span>
+              <span style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-light)"></span>
+            </div>
+            <div id="bkrow-flats-list"></div>
+            <div class="bk-row bk-total" id="bkrow-visit-total" style="display:none">
+              <span>Total per visit (incl. add-ons)</span>
+              <span id="bk-visit-total" class="bk-val bk-final">—</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- MARGIN ANALYSIS (owner only) -->
+        <section class="card output-card owner-only">
+          <div class="sec-header">
+            <div class="sec-icon">📊</div>
+            <div class="sec-title">Margin Analysis — Per Visit</div>
+            <div class="owner-badge">Owner View</div>
+          </div>
+          <div class="margin-grid">
+            <div class="mg-row mg-revenue"><div class="mg-label">Revenue (client charge)</div><div class="mg-val" id="mg-revenue">—</div></div>
+            <div class="mg-row mg-cost"><div class="mg-label">Labour cost <span class="mg-note" id="mg-labour-note"></span></div><div class="mg-val" id="mg-labour">—</div></div>
+            <div class="mg-row mg-cost" id="mgrow-supplies" style="display:none"><div class="mg-label">Supplies cost</div><div class="mg-val" id="mg-supplies">—</div></div>
+            <div class="mg-row mg-cost" id="mgrow-addons"   style="display:none"><div class="mg-label">Add-on costs</div><div class="mg-val" id="mg-addons">—</div></div>
+            <div class="mg-row mg-gross"><div class="mg-label">Gross Profit</div><div class="mg-val" id="mg-gross">—</div></div>
+            <div class="mg-row"><div class="mg-label">Gross Margin</div><div class="mg-val" id="mg-pct">—</div></div>
+          </div>
+          <div class="margin-vis">
+            <div class="mv-bar-track">
+              <div class="mv-bar-fill" id="mvBarFill"></div>
+              <div class="mv-target-marker" id="mvTarget"></div>
+            </div>
+            <div class="mv-bar-ends"><span>0%</span><span id="mvTargetLabel">Target: 30%</span><span>60%</span></div>
+          </div>
+          <div class="margin-status-badge" id="marginStatusBadge"></div>
+        </section>
+
+        <!-- REVENUE PROJECTIONS (owner only) -->
+        <section class="card output-card owner-only">
+          <div class="sec-header">
+            <div class="sec-icon">📈</div>
+            <div class="sec-title">Revenue Projections</div>
+            <div class="owner-badge">Owner View</div>
+          </div>
+          <div id="projOneOffNote" class="one-off-note" style="display:none">
+            <span>ℹ️</span> One-off selected — projections show per-visit figures only. Select a recurring frequency to see full projections.
+          </div>
+          <div class="proj-table" id="projTable">
+            <div class="pt-head"><div>Period</div><div>Visits</div><div>Revenue</div><div>Labour</div><div>Gross Profit</div><div>Margin</div></div>
+            <div class="pt-row"             ><div class="pt-label">Weekly</div>   <div id="pt-w-v">—</div><div class="pt-rev" id="pt-w-r">—</div><div class="pt-cost" id="pt-w-l">—</div><div class="pt-profit" id="pt-w-p">—</div><div id="pt-w-m">—</div></div>
+            <div class="pt-row"             ><div class="pt-label">Monthly</div>  <div id="pt-m-v">—</div><div class="pt-rev" id="pt-m-r">—</div><div class="pt-cost" id="pt-m-l">—</div><div class="pt-profit" id="pt-m-p">—</div><div id="pt-m-m">—</div></div>
+            <div class="pt-row"             ><div class="pt-label">Quarterly</div><div id="pt-q-v">—</div><div class="pt-rev" id="pt-q-r">—</div><div class="pt-cost" id="pt-q-l">—</div><div class="pt-profit" id="pt-q-p">—</div><div id="pt-q-m">—</div></div>
+            <div class="pt-row pt-row-annual"><div class="pt-label">Annual</div>   <div id="pt-y-v">—</div><div class="pt-rev" id="pt-y-r">—</div><div class="pt-cost" id="pt-y-l">—</div><div class="pt-profit" id="pt-y-p">—</div><div id="pt-y-m">—</div></div>
+          </div>
+        </section>
+
+        <!-- NET PROFIT (owner only) -->
+        <section class="card output-card owner-only">
+          <div class="sec-header">
+            <div class="sec-icon">💰</div>
+            <div class="sec-title">Net Profit — Annual</div>
+            <div class="owner-badge">Owner View</div>
+          </div>
+          <div class="net-grid">
+            <div class="net-item"><div class="net-lbl">Annual Revenue</div><div class="net-val" id="net-rev">—</div></div>
+            <div class="net-item"><div class="net-lbl">Annual Labour</div><div class="net-val net-cost" id="net-labour">—</div></div>
+            <div class="net-item" id="netrow-supplies" style="display:none"><div class="net-lbl">Annual Supplies</div><div class="net-val net-cost" id="net-supplies">—</div></div>
+            <div class="net-item" id="netrow-addons"   style="display:none"><div class="net-lbl">Annual Add-ons</div><div class="net-val net-cost" id="net-addons">—</div></div>
+            <div class="net-item"><div class="net-lbl">Overhead (<span id="net-oh-label">10</span>% of rev)</div><div class="net-val net-cost" id="net-overhead">—</div></div>
+            <div class="net-item"><div class="net-lbl">Sales Commission</div><div class="net-val net-cost" id="net-commission">—</div></div>
+            <div class="net-item net-total"><div class="net-lbl">Annual Net Profit</div><div class="net-val" id="net-profit">—</div></div>
+            <div class="net-item net-total"><div class="net-lbl">Net Margin</div><div class="net-val" id="net-margin">—</div></div>
+          </div>
+        </section>
+
+        <!-- CLIENT QUOTE OUTPUT -->
+        <section class="card output-card">
+          <div class="sec-header">
+            <div class="sec-icon">📄</div>
+            <div class="sec-title">Client Quote</div>
+            <button class="copy-btn" id="copyBtn" onclick="copyQuote()">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/></svg>
+              Copy
+            </button>
+          </div>
+          <div class="quote-output" id="quoteOutput">Fill in the details above to generate your client quote.</div>
+        </section>
+
+      </div>
+      <!-- /output-col -->
+
+    </div>
+  </main>
+
+  <script src="quote-builder.js"></script>
+</body>
+</html>

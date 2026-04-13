@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SweepRight — Book a trusted, background-checked cleaner anywhere in the UK in 60 seconds.">
+<title>Contact | SweepRight</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html"><div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg></div><div class="logo-text">Sweep<span>Right</span></div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="booking.html" class="nav-cta">Get Quote</a>
+    </div>
+    <div class="burger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="booking.html" style="background:var(--primary);color:white;font-weight:700;text-align:center;border-radius:10px;margin-top:4px">Get Quote</a>
+</div>
+
+<main>
+
+<div class="page-hero">
+<div class="container">
+<div class="tag">Get in Touch</div>
+<h1>We're here to help</h1>
+<p>Questions about a booking, pricing, or anything else? We typically reply within 30 minutes during business hours.</p>
+</div>
+</div>
+<section class="section">
+<div class="container">
+<div class="contact-layout">
+<div class="contact-info">
+<div class="tag">Contact Details</div>
+<h2>Talk to a real person</h2>
+<p>Our customer support team is available 7 days a week, 8am–10pm UK time. We don't use bots — every message is handled by a real human.</p>
+<div class="contact-methods">
+<div class="contact-method">
+<div class="contact-method-icon">📞</div>
+<div class="contact-method-text">
+<div class="label">Phone / WhatsApp</div>
+<div class="value">+44 20 0000 0000</div>
+</div>
+</div>
+<div class="contact-method">
+<div class="contact-method-icon">📧</div>
+<div class="contact-method-text">
+<div class="label">Email</div>
+<div class="value">hello@sweepright.co.uk</div>
+</div>
+</div>
+<div class="contact-method">
+<div class="contact-method-icon">💬</div>
+<div class="contact-method-text">
+<div class="label">Live Chat</div>
+<div class="value">Available on this website · avg. reply 2 min</div>
+</div>
+</div>
+<div class="contact-method">
+<div class="contact-method-icon">🕐</div>
+<div class="contact-method-text">
+<div class="label">Support Hours</div>
+<div class="value">7 days a week · 8:00 AM – 10:00 PM UK</div>
+</div>
+</div>
+</div>
+<div style="background:var(--primary-light);border-radius:var(--radius);padding:20px 22px">
+<div style="font-weight:700;margin-bottom:6px;color:var(--primary-dark)">🚀 Need to change a booking?</div>
+<p style="font-size:0.87rem">Log into your account dashboard to reschedule, cancel, or update any upcoming booking — no need to contact us.</p>
+<button class="btn btn-primary" onclick="window.location.href='booking.html'" style="margin-top:12px;padding:9px 18px;font-size:0.85rem">Manage Booking</button>
+</div>
+</div>
+<div class="contact-form-card">
+<h3>Send us a message</h3>
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">First Name</label>
+<input class="form-input" placeholder="Your name" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label">Last Name</label>
+<input class="form-input" placeholder="Your surname" type="text"/>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">Email</label>
+<input class="form-input" placeholder="you@example.com" type="email"/>
+</div>
+<div class="form-group">
+<label class="form-label">Phone (optional)</label>
+<input class="form-input" placeholder="+44 7000 000000" type="tel"/>
+</div>
+<div class="form-group">
+<label class="form-label">What can we help with?</label>
+<select class="form-select">
+<option>General enquiry</option>
+<option>Booking question</option>
+<option>Change or cancel a booking</option>
+<option>Cleaner feedback</option>
+<option>Pricing &amp; services</option>
+<option>Business / office cleaning</option>
+<option>Other</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label">Message</label>
+<textarea class="form-textarea" placeholder="Tell us how we can help you..."></textarea>
+</div>
+<button class="btn btn-primary" onclick="submitContact()" style="width:100%">Send Message</button>
+<div class="success-msg" id="contactSuccess">✅ Message sent! We'll get back to you within 30 minutes.</div>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+  <div class="footer-brand">
+    <a class="logo" href="index.html">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg></div>
+      <div class="logo-text">Sweep<span>Right</span></div>
+    </a>
+    <p>The UK's most trusted cleaning platform. Book online in 60 seconds, get a vetted cleaner at your door.</p>
+    <div class="footer-social">
+      <a title="Instagram">📸</a><a title="Facebook">👍</a><a title="TikTok">🎵</a><a title="WhatsApp">💬</a>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <ul>
+      <li><a href="services.html">Home Cleaning</a></li>
+      <li><a href="services.html">Commercial Cleaning</a></li>
+      <li><a href="services.html">Deep Cleaning</a></li>
+      <li><a href="services.html">Move In / Move Out</a></li>
+      <li><a href="booking.html">Get a Quote</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="tel:+447425583734">+44 7425 583734</a></li>
+      <li><a href="mailto:cleaners@sweeprightcleaning.com">cleaners@sweeprightcleaning.com</a></li>
+      <li><a>Serving all of the UK</a></li>
+    </ul>
+  </div>
+</div>
+<div class="footer-bottom">
+  <p>&copy; 2026 SweepRight. All rights reserved.</p>
+  <div class="footer-bottom-links">
+    <a>Privacy Policy</a><a>Terms of Service</a><a>Cookie Policy</a>
+  </div>
+</div>
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  // SweepRight Cleaning — Cloudflare Worker Configuration
+  // Deploy:  npx wrangler deploy
+  // Dev:     npx wrangler dev
+  // Secrets: npx wrangler secret put STRIPE_SECRET_KEY
+  //          npx wrangler secret put EMAIL_API_KEY
+
+  "name": "sweepright",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-04-01",
+
+  // ── Static asset serving ──
+  // All HTML, CSS, JS, images live in /public.
+  // The Worker intercepts /api/* before assets are checked.
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+
+  // ── Non-secret environment variables ──
+  // Secrets (STRIPE_SECRET_KEY, EMAIL_API_KEY, etc.) must be added via:
+  //   npx wrangler secret put <NAME>
+  //   OR Cloudflare Dashboard → Worker → Settings → Variables & Secrets
+  "vars": {
+    "SITE_URL": "https://sweeprightcleaning.com",
+    "INTERNAL_EMAIL": "cleaners@sweeprightcleaning.com",
+    "EMAIL_FROM": "SweepRight <bookings@sweeprightcleaning.com>",
+    "EMAIL_API_URL": "https://api.resend.com/emails"
+  }
+
+  // ── Optional: KV namespace for booking storage ──
+  // Uncomment after creating KV namespace:
+  //   npx wrangler kv namespace create BOOKINGS
+  // Then paste the id below.
+  // "kv_namespaces": [
+  //   { "binding": "BOOKINGS_KV", "id": "YOUR_KV_NAMESPACE_ID" }
+  // ]
+}
