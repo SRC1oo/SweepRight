@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Get an instant cleaning quote from SweepRight. Home cleaning from £24/hr, commercial from £26/hr. Book and pay online in minutes.">
+<title>Get a Quote | SweepRight — Trusted Cleaning Across the UK</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html"><div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg></div><div class="logo-text">Sweep<span>Right</span></div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="booking.html" class="nav-cta active">Get Quote</a>
+    </div>
+    <div class="burger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  <a href="booking.html" style="background:var(--primary);color:white;font-weight:700;text-align:center;border-radius:10px;margin-top:4px">Get Quote</a>
+</div>
+
+<main>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+<div class="container text-center">
+  <div class="tag">Instant Quote</div>
+  <h1>Build your cleaning quote</h1>
+  <p>Customise your clean, review your quote, and book securely — all in one place.</p>
+</div>
+</div>
+
+<section class="section-sm quote-form-area">
+<div class="container">
+
+<!-- STEP INDICATORS -->
+<div class="quote-steps-nav">
+  <div class="step-indicator current" id="step-ind-1"><span class="step-num-circle">1</span><span class="step-label">Service</span></div>
+  <div class="step-connector"></div>
+  <div class="step-indicator" id="step-ind-2"><span class="step-num-circle">2</span><span class="step-label">Size</span></div>
+  <div class="step-connector"></div>
+  <div class="step-indicator" id="step-ind-3"><span class="step-num-circle">3</span><span class="step-label">Hours</span></div>
+  <div class="step-connector"></div>
+  <div class="step-indicator" id="step-ind-4"><span class="step-num-circle">4</span><span class="step-label">Extras</span></div>
+  <div class="step-connector"></div>
+  <div class="step-indicator" id="step-ind-5"><span class="step-num-circle">5</span><span class="step-label">Date</span></div>
+  <div class="step-connector"></div>
+  <div class="step-indicator" id="step-ind-6"><span class="step-num-circle">6</span><span class="step-label">Details</span></div>
+  <div class="step-connector"></div>
+  <div class="step-indicator" id="step-ind-7"><span class="step-num-circle">7</span><span class="step-label">Review</span></div>
+</div>
+
+<div class="quote-layout">
+
+<!-- ═══ LEFT: FORM STEPS ═══ -->
+<div class="quote-form-col">
+
+<!-- STEP 1: SERVICE TYPE + PROPERTY -->
+<div class="quote-step active" id="quote-step-1">
+  <h3>What would you like cleaned?</h3>
+  <p class="step-desc">Choose the type of property and we'll tailor the rest of the process.</p>
+
+  <div class="cat-toggle">
+    <button class="cat-btn active" data-cat="home" onclick="selectCategory('home')">
+      <span class="cat-icon">🏠</span> Home Cleaning
+      <span class="cat-from">From £24/hr</span>
+    </button>
+    <button class="cat-btn" data-cat="commercial" onclick="selectCategory('commercial')">
+      <span class="cat-icon">🏢</span> Commercial Cleaning
+      <span class="cat-from">From £26/hr</span>
+    </button>
+  </div>
+
+  <div class="form-label" style="margin-top:28px">Select Property Type</div>
+  <div class="prop-types-grid" id="property-types-grid"></div>
+
+  <div class="step-nav" style="justify-content:flex-end">
+    <button class="btn btn-primary" onclick="goStep(2)">Continue →</button>
+  </div>
+</div>
+
+<!-- STEP 2: SIZE -->
+<div class="quote-step" id="quote-step-2">
+  <h3>How big is the property?</h3>
+  <p class="step-desc">This helps us recommend the right amount of time for a thorough clean.</p>
+
+  <!-- Home size inputs -->
+  <div id="home-size-inputs">
+    <div class="size-steppers">
+      <div class="stepper-group">
+        <div class="stepper-label">Bedrooms</div>
+        <div class="stepper">
+          <button class="stepper-btn" onclick="adjustBedrooms(-1)">−</button>
+          <span class="stepper-val" id="input-bedrooms">2</span>
+          <button class="stepper-btn" onclick="adjustBedrooms(1)">+</button>
+        </div>
+      </div>
+      <div class="stepper-group">
+        <div class="stepper-label">Bathrooms</div>
+        <div class="stepper">
+          <button class="stepper-btn" onclick="adjustBathrooms(-1)">−</button>
+          <span class="stepper-val" id="input-bathrooms">1</span>
+          <button class="stepper-btn" onclick="adjustBathrooms(1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Commercial size inputs -->
+  <div id="commercial-size-inputs" style="display:none">
+    <div class="form-group">
+      <label class="form-label">Approximate Square Footage</label>
+      <input class="form-input" id="input-sqft" type="number" value="1500" min="100" step="100" oninput="updateSqft()">
+      <div class="input-hint">Approximate is fine — we'll confirm during the visit.</div>
+    </div>
+  </div>
+
+  <!-- Recommendation bar -->
+  <div class="rec-bar" id="rec-bar"></div>
+
+  <div class="step-nav">
+    <button class="btn btn-outline" onclick="goStep(1)">← Back</button>
+    <button class="btn btn-primary" onclick="goStep(3)">Continue →</button>
+  </div>
+</div>
+
+<!-- STEP 3: HOURS + FREQUENCY -->
+<div class="quote-step" id="quote-step-3">
+  <h3>How long and how often?</h3>
+  <p class="step-desc">Select your preferred duration and frequency. Recurring bookings unlock savings.</p>
+
+  <div class="form-label">Cleaning Duration</div>
+  <div class="hours-selector">
+    <button class="stepper-btn stepper-btn-lg" onclick="adjustHours(-1)">−</button>
+    <div class="hours-display">
+      <span class="hours-num" id="hours-display">3</span>
+      <span class="hours-unit">hours</span>
+    </div>
+    <button class="stepper-btn stepper-btn-lg" onclick="adjustHours(1)">+</button>
+  </div>
+  <div class="hours-min-note">Minimum 3 hours per booking</div>
+
+  <!-- Below recommendation warning -->
+  <div class="below-rec-box" id="below-rec-box" style="display:none">
+    <div class="below-rec-header">
+      <span class="below-rec-icon">⚠️</span>
+      <span>You've selected fewer hours than we recommend for this property size.</span>
+    </div>
+    <p class="below-rec-text">We recommend at least <strong id="rec-min-display">3</strong> hours for a full clean. Since you selected less, please tell us which areas you'd like us to prioritise.</p>
+    <textarea class="form-textarea" id="below-rec-explanation" placeholder="e.g. Focus on kitchen and bathrooms only, skip bedrooms..." rows="3"></textarea>
+  </div>
+
+  <div class="form-label" style="margin-top:28px">Frequency</div>
+  <div class="freq-grid">
+    <div class="freq-card selected" data-freq="one-off" onclick="selectFrequency('one-off')">
+      <div class="freq-name">One-off</div>
+      <div class="freq-sub">Single visit</div>
+    </div>
+    <div class="freq-card" data-freq="daily" onclick="selectFrequency('daily')">
+      <div class="freq-name">Daily</div>
+      <div class="freq-discount">Save 12.5%</div>
+    </div>
+    <div class="freq-card" data-freq="weekly" onclick="selectFrequency('weekly')">
+      <div class="freq-name">Weekly</div>
+      <div class="freq-discount">Save 10%</div>
+    </div>
+    <div class="freq-card" data-freq="fortnightly" onclick="selectFrequency('fortnightly')">
+      <div class="freq-name">Fortnightly</div>
+      <div class="freq-discount">Save 7%</div>
+    </div>
+    <div class="freq-card" data-freq="monthly" onclick="selectFrequency('monthly')">
+      <div class="freq-name">Monthly</div>
+      <div class="freq-discount">Save 5%</div>
+    </div>
+  </div>
+
+  <!-- Recurring fields -->
+  <div id="recurring-fields" style="display:none;margin-top:20px">
+    <div class="form-label">Preferred Day(s)</div>
+    <div class="days-grid">
+      <button class="day-btn" data-day="monday" onclick="toggleRecurringDay('monday')">Mon</button>
+      <button class="day-btn" data-day="tuesday" onclick="toggleRecurringDay('tuesday')">Tue</button>
+      <button class="day-btn" data-day="wednesday" onclick="toggleRecurringDay('wednesday')">Wed</button>
+      <button class="day-btn" data-day="thursday" onclick="toggleRecurringDay('thursday')">Thu</button>
+      <button class="day-btn" data-day="friday" onclick="toggleRecurringDay('friday')">Fri</button>
+      <button class="day-btn" data-day="saturday" onclick="toggleRecurringDay('saturday')">Sat</button>
+      <button class="day-btn" data-day="sunday" onclick="toggleRecurringDay('sunday')">Sun</button>
+    </div>
+  </div>
+
+  <div class="step-nav">
+    <button class="btn btn-outline" onclick="goStep(2)">← Back</button>
+    <button class="btn btn-primary" onclick="goStep(4)">Continue →</button>
+  </div>
+</div>
+
+<!-- STEP 4: EXTRAS -->
+<div class="quote-step" id="quote-step-4">
+  <h3>Any extras?</h3>
+  <p class="step-desc">Add time-based extras to customise your clean. Each extra adds time and is priced transparently.</p>
+
+  <div id="extras-grid"></div>
+
+  <div class="step-nav">
+    <button class="btn btn-outline" onclick="goStep(3)">← Back</button>
+    <button class="btn btn-primary" onclick="goStep(5)">Continue →</button>
+  </div>
+</div>
+
+<!-- STEP 5: DATE & TIME -->
+<div class="quote-step" id="quote-step-5">
+  <h3>When would you like us?</h3>
+  <p class="step-desc">We require at least 48 hours' notice for all bookings.</p>
+
+  <div class="form-group">
+    <label class="form-label">Preferred Date</label>
+    <input class="form-input" type="date" id="booking-date" onchange="state.bookingDate=this.value">
+  </div>
+
+  <div class="form-label">Preferred Time Window</div>
+  <div class="time-window-grid">
+    <button class="time-btn selected" data-time="morning" onclick="selectTimeWindow('morning')">
+      <span class="time-icon">🌅</span>
+      <span class="time-label">Morning</span>
+      <span class="time-range">8am – 12pm</span>
+    </button>
+    <button class="time-btn" data-time="afternoon" onclick="selectTimeWindow('afternoon')">
+      <span class="time-icon">☀️</span>
+      <span class="time-label">Afternoon</span>
+      <span class="time-range">12pm – 5pm</span>
+    </button>
+    <button class="time-btn" data-time="evening" onclick="selectTimeWindow('evening')">
+      <span class="time-icon">🌙</span>
+      <span class="time-label">Evening</span>
+      <span class="time-range">5pm – 8pm</span>
+    </button>
+  </div>
+
+  <div class="step-nav">
+    <button class="btn btn-outline" onclick="goStep(4)">← Back</button>
+    <button class="btn btn-primary" onclick="goStep(6)">Continue →</button>
+  </div>
+</div>
+
+<!-- STEP 6: CUSTOMER DETAILS -->
+<div class="quote-step" id="quote-step-6">
+  <h3>Your details</h3>
+  <p class="step-desc">We'll use these to confirm your booking and keep you updated.</p>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Full Name *</label>
+      <input class="form-input" type="text" placeholder="Your full name" oninput="state.customerName=this.value">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Company Name <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
+      <input class="form-input" type="text" placeholder="Company name" oninput="state.companyName=this.value">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Email Address *</label>
+      <input class="form-input" type="email" placeholder="you@example.com" oninput="state.email=this.value">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number *</label>
+      <input class="form-input" type="tel" placeholder="+44 7000 000000" oninput="state.phone=this.value">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Address *</label>
+    <input class="form-input" type="text" placeholder="Full address including building/flat number" oninput="state.address=this.value">
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Postcode *</label>
+      <input class="form-input" type="text" placeholder="e.g. SW1A 1AA" oninput="state.postcode=this.value">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Access Instructions <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
+      <input class="form-input" type="text" placeholder="e.g. Key with concierge, buzzer code" oninput="state.accessInstructions=this.value">
+    </div>
+  </div>
+
+  <div class="privacy-note">
+    🔒 Your details are encrypted and only shared with your assigned cleaner.
+  </div>
+
+  <div class="step-nav">
+    <button class="btn btn-outline" onclick="goStep(5)">← Back</button>
+    <button class="btn btn-primary" onclick="renderReview();goStep(7)">Review Quote →</button>
+  </div>
+</div>
+
+<!-- STEP 7: REVIEW + PAY -->
+<div class="quote-step" id="quote-step-7">
+  <h3>Review your booking</h3>
+  <p class="step-desc">Please check everything looks correct before proceeding to payment.</p>
+
+  <div id="review-content"></div>
+
+  <div class="terms-row" style="margin-top:20px">
+    <input type="checkbox" id="terms-check">
+    <label for="terms-check">I agree to the <a href="#" style="color:var(--primary)">Terms & Conditions</a> and <a href="#" style="color:var(--primary)">Privacy Policy</a>. I understand I can cancel or reschedule up to 24 hours before my booking.</label>
+  </div>
+
+  <div class="pay-section">
+    <button class="btn btn-primary btn-lg btn-pay" id="pay-now-btn" onclick="initiatePayment()">
+      <span class="pay-lock">🔒</span> Pay Now — <span id="pay-amount">£0.00</span>
+    </button>
+    <div class="pay-loading" id="pay-loading" style="display:none">
+      <div class="spinner"></div>
+      <span>Securing your checkout…</span>
+    </div>
+    <div class="pay-trust">
+      <span>🔒 256-bit SSL Encryption</span>
+      <span>💳 Visa · Mastercard · Apple Pay</span>
+      <span>✅ Satisfaction Guarantee</span>
+    </div>
+  </div>
+
+  <div class="step-nav">
+    <button class="btn btn-outline" onclick="goStep(6)">← Back</button>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══ RIGHT: LIVE SUMMARY ═══ -->
+<div class="quote-summary-col">
+<div class="quote-summary">
+  <div class="summary-header">
+    <h3>Quote Summary</h3>
+    <div class="summary-live-badge">Live</div>
+  </div>
+
+  <div class="summary-line"><span>Service</span><strong id="sum-category">Home Cleaning</strong></div>
+  <div class="summary-line"><span>Property</span><strong id="sum-property">—</strong></div>
+  <div class="summary-line"><span>Rate</span><strong id="sum-rate">£26/hr</strong></div>
+  <div class="summary-line"><span>Base Hours</span><strong id="sum-hours">3 hrs</strong></div>
+  <div class="summary-line" id="sum-extra-hours-row" style="display:none"><span>Add-on Time</span><strong id="sum-extra-hours">—</strong></div>
+  <div class="summary-line summary-line-bold"><span>Total Time</span><strong id="sum-total-hours">3.0 hrs</strong></div>
+  <div class="summary-line"><span>Frequency</span><strong id="sum-freq">One-off</strong></div>
+  <div class="summary-line discount" id="sum-discount-row" style="display:none"><span>Discount</span><strong id="sum-discount">—</strong></div>
+
+  <div id="sum-extras-row" style="display:none">
+    <div class="summary-divider"></div>
+    <div class="sum-extras-label">Selected Extras</div>
+    <div class="sum-extras-tags" id="sum-extras-list"></div>
+  </div>
+
+  <div class="summary-divider"></div>
+  <div class="summary-total-row">
+    <span>Total</span>
+    <strong id="sum-total">£78.00</strong>
+  </div>
+  <div class="summary-per-visit" id="sum-per-visit">One-off clean</div>
+
+  <div class="summary-trust">
+    <div class="summary-trust-item">🔒 Secure payment</div>
+    <div class="summary-trust-item">✅ Free cancellation (24h notice)</div>
+    <div class="summary-trust-item">🧹 Background-checked cleaners</div>
+    <div class="summary-trust-item">⭐ 4.9/5 average rating</div>
+  </div>
+
+  <div class="summary-contact">
+    <div>Questions? Contact us:</div>
+    <a href="tel:+447425583734" class="summary-phone">📞 +44 7425 583734</a>
+    <a href="mailto:cleaners@sweeprightcleaning.com" class="summary-email">✉️ cleaners@sweeprightcleaning.com</a>
+  </div>
+</div>
+</div>
+
+</div><!-- /quote-layout -->
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+  <div class="footer-brand">
+    <a class="logo" href="index.html">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7L12 2z"/></svg></div>
+      <div class="logo-text">Sweep<span>Right</span></div>
+    </a>
+    <p>The UK's most trusted cleaning platform. Book online in 60 seconds, get a vetted cleaner at your door.</p>
+    <div class="footer-social">
+      <a title="Instagram">📸</a><a title="Facebook">👍</a><a title="TikTok">🎵</a><a title="WhatsApp">💬</a>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <ul>
+      <li><a href="services.html">Home Cleaning</a></li>
+      <li><a href="services.html">Commercial Cleaning</a></li>
+      <li><a href="services.html">Deep Cleaning</a></li>
+      <li><a href="services.html">Move In / Move Out</a></li>
+      <li><a href="booking.html">Get a Quote</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="tel:+447425583734">+44 7425 583734</a></li>
+      <li><a href="mailto:cleaners@sweeprightcleaning.com">cleaners@sweeprightcleaning.com</a></li>
+      <li><a>Serving all of the UK</a></li>
+    </ul>
+  </div>
+</div>
+<div class="footer-bottom">
+  <p>&copy; 2026 SweepRight. All rights reserved.</p>
+  <div class="footer-bottom-links">
+    <a>Privacy Policy</a><a>Terms of Service</a><a>Cookie Policy</a>
+  </div>
+</div>
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

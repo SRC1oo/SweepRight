@@ -5,7 +5,8 @@
  *
  * Routing:
  *   POST /api/create-checkout-session  → Stripe checkout creation
- *   POST /api/send-booking-email       → Send confirmation emails
+ *   POST /api/send-booking-email       → Send confirmation emails (legacy)
+ *   POST /api/send-confirmation        → Success-page email trigger (dedup-safe)
  *   GET  /api/booking-details          → Retrieve stored booking
  *   OPTIONS *                          → CORS preflight
  *   *                                  → env.ASSETS (static site)
@@ -96,6 +97,9 @@ export default {
         }
         if (path === '/api/send-booking-email' && method === 'POST') {
           return await handleSendBookingEmail(request, env);
+        }
+        if (path === '/api/send-confirmation' && method === 'POST') {
+          return await handleSendConfirmation(request, env);
         }
         if (path === '/api/booking-details' && method === 'GET') {
           return await handleBookingDetails(request, env);
@@ -285,6 +289,90 @@ async function handleBookingDetails(request, env) {
   }
 
   return apiResponse({ error: 'Booking not found' }, 404);
+}
+
+
+// ═════════════════════════════════════════════════════════════
+// POST /api/send-confirmation
+// Called by the success page immediately after payment.
+// Fetches the booking via KV or Stripe, sends both emails,
+// and stores a dedup flag so refreshes never re-send.
+//
+// Body:   { session_id: "cs_..." }
+// Return: { success: true, alreadySent: false }
+//       | { success: true, alreadySent: true  }
+//       | { success: false, error: "..."       }
+// ═════════════════════════════════════════════════════════════
+async function handleSendConfirmation(request, env) {
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return apiResponse({ success: false, error: 'Invalid JSON body' }, 400);
+  }
+
+  const sessionId = body.session_id;
+  if (!sessionId || typeof sessionId !== 'string') {
+    return apiResponse({ success: false, error: 'Missing session_id' }, 400);
+  }
+
+  const dedupKey = 'confirmation_sent_' + sessionId;
+
+  // ── Duplicate-send guard ──
+  // Check KV for a flag set on the previous successful send.
+  if (env.BOOKINGS_KV) {
+    const alreadySent = await env.BOOKINGS_KV.get(dedupKey);
+    if (alreadySent) {
+      return apiResponse({ success: true, alreadySent: true });
+    }
+  }
+
+  // ── Retrieve booking: KV first, then Stripe metadata fallback ──
+  let booking = null;
+
+  if (env.BOOKINGS_KV) {
+    const stored = await env.BOOKINGS_KV.get('booking_' + sessionId);
+    if (stored) {
+      try { booking = JSON.parse(stored); } catch { /* fall through to Stripe */ }
+    }
+  }
+
+  if (!booking && env.STRIPE_SECRET_KEY) {
+    const res = await fetch(
+      `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
+      { headers: { 'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}` } }
+    );
+    const session = await res.json();
+    if (session && session.metadata) {
+      booking = {
+        ...session.metadata,
+        stripeSessionId: session.id,
+        paymentIntentId: session.payment_intent || '',
+        amountPaid:      ((session.amount_total || 0) / 100).toFixed(2),
+      };
+    }
+  }
+
+  if (!booking) {
+    return apiResponse({ success: false, error: 'Booking not found for this session' }, 404);
+  }
+
+  const customerEmail = booking.email || booking.customerEmail;
+  if (!customerEmail) {
+    return apiResponse({ success: false, error: 'No customer email on booking' }, 400);
+  }
+
+  // ── Send both emails ──
+  const results = await sendBothEmails(env, booking, customerEmail);
+
+  // ── Set dedup flag (90-day TTL) ──
+  // Only written after a successful send attempt, so a failed send
+  // can be retried on the next page load rather than being silently skipped.
+  if (env.BOOKINGS_KV) {
+    await env.BOOKINGS_KV.put(dedupKey, '1', { expirationTtl: 60 * 60 * 24 * 90 });
+  }
+
+  return apiResponse({ success: true, alreadySent: false, results });
 }
 
 
