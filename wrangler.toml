@@ -1,21 +1,29 @@
-# SweepRight — Cloudflare Pages Configuration
-# Deploy: npx wrangler pages deploy . --project-name=sweepright
+# SweepRight Cleaning — Cloudflare Worker Configuration
+# This file is kept in sync with wrangler.jsonc.
+# Both files are present; wrangler.jsonc takes precedence in newer Wrangler
+# versions, but this file is kept correct as a fallback for CI environments.
 
 name = "sweepright"
-compatibility_date = "2024-01-01"
+main = "src/worker.js"
+compatibility_date = "2026-04-01"
 
-# Environment variables (set via Cloudflare Dashboard → Settings → Environment Variables)
-# Required:
-#   STRIPE_SECRET_KEY       - Stripe secret key
-#   STRIPE_PUBLISHABLE_KEY  - Stripe publishable key
-#   STRIPE_WEBHOOK_SECRET   - Stripe webhook signing secret
-#   SITE_URL                - e.g. https://sweeprightcleaning.com
-#   EMAIL_API_KEY           - Email service API key (Resend recommended)
-#   EMAIL_API_URL           - e.g. https://api.resend.com/emails
-#   EMAIL_FROM              - e.g. SweepRight <bookings@sweeprightcleaning.com>
-#   INTERNAL_EMAIL          - e.g. cleaners@sweeprightcleaning.com
+# Static assets served from /public only — keeps node_modules out of upload
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Non-secret environment variables
+[vars]
+SITE_URL       = "https://sweeprightcleaning.com"
+INTERNAL_EMAIL = "cleaners@sweeprightcleaning.com"
+EMAIL_FROM     = "SweepRight <bookings@sweeprightcleaning.com>"
+EMAIL_API_URL  = "https://api.resend.com/emails"
+
+# Secrets — add via Dashboard or: npx wrangler secret put <NAME>
+# Required: STRIPE_SECRET_KEY, EMAIL_API_KEY
+# Optional: STRIPE_WEBHOOK_SECRET
 
 # Optional KV namespace for booking storage:
 # [[kv_namespaces]]
 # binding = "BOOKINGS_KV"
-# id = "your-kv-namespace-id"
+# id = "YOUR_KV_NAMESPACE_ID"
