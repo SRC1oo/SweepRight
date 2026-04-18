@@ -55,13 +55,13 @@
   <div class="step-connector"></div>
   <div class="step-indicator" id="step-ind-2"><span class="step-num-circle">2</span><span class="step-label">Size</span></div>
   <div class="step-connector"></div>
-  <div class="step-indicator" id="step-ind-3"><span class="step-num-circle">3</span><span class="step-label">Hours</span></div>
+  <div class="step-indicator" id="step-ind-3"><span class="step-num-circle">3</span><span class="step-label">Contact</span></div>
   <div class="step-connector"></div>
-  <div class="step-indicator" id="step-ind-4"><span class="step-num-circle">4</span><span class="step-label">Extras</span></div>
+  <div class="step-indicator" id="step-ind-4"><span class="step-num-circle">4</span><span class="step-label">Hours</span></div>
   <div class="step-connector"></div>
-  <div class="step-indicator" id="step-ind-5"><span class="step-num-circle">5</span><span class="step-label">Date</span></div>
+  <div class="step-indicator" id="step-ind-5"><span class="step-num-circle">5</span><span class="step-label">Extras</span></div>
   <div class="step-connector"></div>
-  <div class="step-indicator" id="step-ind-6"><span class="step-num-circle">6</span><span class="step-label">Details</span></div>
+  <div class="step-indicator" id="step-ind-6"><span class="step-num-circle">6</span><span class="step-label">Schedule</span></div>
   <div class="step-connector"></div>
   <div class="step-indicator" id="step-ind-7"><span class="step-num-circle">7</span><span class="step-label">Review</span></div>
 </div>
@@ -140,8 +140,57 @@
   </div>
 </div>
 
-<!-- STEP 3: HOURS + FREQUENCY -->
+<!-- STEP 3: CONTACT CAPTURE -->
 <div class="quote-step" id="quote-step-3">
+  <h3>Check availability in your area</h3>
+  <p class="step-desc">Just a few details to check availability — takes 10 seconds.</p>
+
+  <!-- Inline confirmation banner (shown after submit) -->
+  <div class="lead-confirm-banner" id="lead-confirm-banner" style="display:none">
+    <span class="lead-confirm-icon">👍</span>
+    <span>Nice — we've got your details. Let's get your cleaner booked.</span>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Full Name *</label>
+      <input class="form-input" id="lead-name" type="text" placeholder="Your full name"
+        oninput="state.customerName=this.value.trim()"
+        onkeydown="advanceOnEnter(event,'lead-phone')">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number *</label>
+      <input class="form-input" id="lead-phone" type="tel" placeholder="+44 7000 000000"
+        oninput="state.phone=this.value.trim()"
+        onkeydown="advanceOnEnter(event,'lead-email')">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Email Address *</label>
+      <input class="form-input" id="lead-email" type="email" placeholder="you@example.com"
+        oninput="state.email=this.value.trim()"
+        onkeydown="advanceOnEnter(event,'lead-postcode')">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Postcode *</label>
+      <input class="form-input" id="lead-postcode" type="text" placeholder="e.g. SW1A 1AA"
+        oninput="state.postcode=this.value.trim()">
+    </div>
+  </div>
+
+  <div class="privacy-note" style="margin-top:4px">
+    🔒 We'll check availability instantly — no spam. Your details are only used to manage your booking.
+  </div>
+
+  <div class="step-nav" style="justify-content:space-between">
+    <button class="btn btn-outline" onclick="goStep(2)">← Back</button>
+    <button class="btn btn-primary" onclick="submitLeadAndContinue()">Check Availability →</button>
+  </div>
+</div>
+
+<!-- STEP 4: HOURS + FREQUENCY -->
+<div class="quote-step" id="quote-step-4">
   <h3>How long and how often?</h3>
   <p class="step-desc">Select your preferred duration and frequency. Recurring bookings unlock savings.</p>
 
@@ -160,9 +209,9 @@
   <div class="below-rec-box" id="below-rec-box" style="display:none">
     <div class="below-rec-header">
       <span class="below-rec-icon">⚠️</span>
-      <span>You've selected fewer hours than we recommend for this property size.</span>
+      <span>You've selected fewer hours than we recommend for this property.</span>
     </div>
-    <p class="below-rec-text">We recommend at least <strong id="rec-min-display">3</strong> hours for a full clean. Since you selected less, please tell us which areas you'd like us to prioritise.</p>
+    <p class="below-rec-text">We strongly recommend at least <strong id="rec-min-display">3</strong> hours for a thorough clean of this size. Since you've chosen less, please let us know what to prioritise so your cleaner can focus their time.</p>
     <textarea class="form-textarea" id="below-rec-explanation" placeholder="e.g. Focus on kitchen and bathrooms only, skip bedrooms..." rows="3"></textarea>
   </div>
 
@@ -171,10 +220,6 @@
     <div class="freq-card selected" data-freq="one-off" onclick="selectFrequency('one-off')">
       <div class="freq-name">One-off</div>
       <div class="freq-sub">Single visit</div>
-    </div>
-    <div class="freq-card" data-freq="daily" onclick="selectFrequency('daily')">
-      <div class="freq-name">Daily</div>
-      <div class="freq-discount">Save 12.5%</div>
     </div>
     <div class="freq-card" data-freq="weekly" onclick="selectFrequency('weekly')">
       <div class="freq-name">Weekly</div>
@@ -205,28 +250,28 @@
   </div>
 
   <div class="step-nav">
-    <button class="btn btn-outline" onclick="goStep(2)">← Back</button>
-    <button class="btn btn-primary" onclick="goStep(4)">Continue →</button>
+    <button class="btn btn-outline" onclick="goStep(3)">← Back</button>
+    <button class="btn btn-primary" onclick="goStep(5)">Continue →</button>
   </div>
 </div>
 
-<!-- STEP 4: EXTRAS -->
-<div class="quote-step" id="quote-step-4">
+<!-- STEP 5: EXTRAS -->
+<div class="quote-step" id="quote-step-5">
   <h3>Any extras?</h3>
   <p class="step-desc">Add time-based extras to customise your clean. Each extra adds time and is priced transparently.</p>
 
   <div id="extras-grid"></div>
 
   <div class="step-nav">
-    <button class="btn btn-outline" onclick="goStep(3)">← Back</button>
-    <button class="btn btn-primary" onclick="goStep(5)">Continue →</button>
+    <button class="btn btn-outline" onclick="goStep(4)">← Back</button>
+    <button class="btn btn-primary" onclick="goStep(6)">Continue →</button>
   </div>
 </div>
 
-<!-- STEP 5: DATE & TIME -->
-<div class="quote-step" id="quote-step-5">
-  <h3>When would you like us?</h3>
-  <p class="step-desc">We require at least 48 hours' notice for all bookings.</p>
+<!-- STEP 6: SCHEDULE + ADDRESS -->
+<div class="quote-step" id="quote-step-6">
+  <h3>When &amp; where?</h3>
+  <p class="step-desc">Choose your preferred date, time window, and confirm your address.</p>
 
   <div class="form-group">
     <label class="form-label">Preferred Date</label>
@@ -252,54 +297,19 @@
     </button>
   </div>
 
-  <div class="step-nav">
-    <button class="btn btn-outline" onclick="goStep(4)">← Back</button>
-    <button class="btn btn-primary" onclick="goStep(6)">Continue →</button>
+  <div class="form-group" style="margin-top:24px">
+    <label class="form-label">Full Address *</label>
+    <input class="form-input" id="input-address" type="text" placeholder="Full address including flat / building number" oninput="state.address=this.value.trim()">
   </div>
-</div>
-
-<!-- STEP 6: CUSTOMER DETAILS -->
-<div class="quote-step" id="quote-step-6">
-  <h3>Your details</h3>
-  <p class="step-desc">We'll use these to confirm your booking and keep you updated.</p>
-
   <div class="form-row">
-    <div class="form-group">
-      <label class="form-label">Full Name *</label>
-      <input class="form-input" type="text" placeholder="Your full name" oninput="state.customerName=this.value">
-    </div>
     <div class="form-group">
       <label class="form-label">Company Name <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
-      <input class="form-input" type="text" placeholder="Company name" oninput="state.companyName=this.value">
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group">
-      <label class="form-label">Email Address *</label>
-      <input class="form-input" type="email" placeholder="you@example.com" oninput="state.email=this.value">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Phone Number *</label>
-      <input class="form-input" type="tel" placeholder="+44 7000 000000" oninput="state.phone=this.value">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="form-label">Address *</label>
-    <input class="form-input" type="text" placeholder="Full address including building/flat number" oninput="state.address=this.value">
-  </div>
-  <div class="form-row">
-    <div class="form-group">
-      <label class="form-label">Postcode *</label>
-      <input class="form-input" type="text" placeholder="e.g. SW1A 1AA" oninput="state.postcode=this.value">
+      <input class="form-input" type="text" placeholder="Company name" oninput="state.companyName=this.value.trim()">
     </div>
     <div class="form-group">
       <label class="form-label">Access Instructions <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
-      <input class="form-input" type="text" placeholder="e.g. Key with concierge, buzzer code" oninput="state.accessInstructions=this.value">
+      <input class="form-input" type="text" placeholder="e.g. Key with concierge, buzzer code" oninput="state.accessInstructions=this.value.trim()">
     </div>
-  </div>
-
-  <div class="privacy-note">
-    🔒 Your details are encrypted and only shared with your assigned cleaner.
   </div>
 
   <div class="step-nav">
@@ -320,6 +330,16 @@
     <label for="terms-check">I agree to the <a href="#" style="color:var(--primary)">Terms & Conditions</a> and <a href="#" style="color:var(--primary)">Privacy Policy</a>. I understand I can cancel or reschedule up to 24 hours before my booking.</label>
   </div>
 
+  <!-- Pre-pay price summary + reassurance -->
+  <div class="pay-summary-bar" id="pay-summary-bar">
+    <div class="pay-summary-line"><span>Total</span><strong id="pay-summary-total">£0.00</strong></div>
+    <div class="pay-summary-breakdown" id="pay-summary-breakdown"></div>
+    <div class="pay-reassurance">
+      <span class="pay-reassurance-icon">🛡️</span>
+      No payment taken until your booking is confirmed. Cancel free with 24 hours' notice.
+    </div>
+  </div>
+
   <div class="pay-section">
     <button class="btn btn-primary btn-lg btn-pay" id="pay-now-btn" onclick="initiatePayment()">
       <span class="pay-lock">🔒</span> Pay Now — <span id="pay-amount">£0.00</span>
@@ -336,7 +356,7 @@
   </div>
 
   <div class="step-nav">
-    <button class="btn btn-outline" onclick="goStep(6)">← Back</button>
+    <button class="btn btn-outline" onclick="goStep(6)">← Edit Details</button>
   </div>
 </div>
 
@@ -377,6 +397,13 @@
     <div class="summary-trust-item">✅ Free cancellation (24h notice)</div>
     <div class="summary-trust-item">🧹 Background-checked cleaners</div>
     <div class="summary-trust-item">⭐ 4.9/5 average rating</div>
+  </div>
+
+  <div class="summary-whatsapp">
+    <a id="whatsapp-summary-btn" href="https://wa.me/447425583734" target="_blank" rel="noopener" class="btn-whatsapp">
+      <span class="wa-icon">💬</span> Chat on WhatsApp
+    </a>
+    <p class="summary-whatsapp-note">Prefer to book quickly? Message us on WhatsApp — we reply in minutes.</p>
   </div>
 
   <div class="summary-contact">

@@ -5,6 +5,7 @@
  *
  * Routing:
  *   POST /api/create-checkout-session  → Stripe checkout creation
+ *   POST /api/send-lead                → Lead capture at step 3 (pre-payment)
  *   POST /api/send-booking-email       → Send confirmation emails (legacy)
  *   POST /api/send-confirmation        → Success-page email trigger (dedup-safe)
  *   GET  /api/booking-details          → Retrieve stored booking
@@ -94,6 +95,9 @@ export default {
       try {
         if (path === '/api/create-checkout-session' && method === 'POST') {
           return await handleCreateCheckout(request, env);
+        }
+        if (path === '/api/send-lead' && method === 'POST') {
+          return await handleSendLead(request, env);
         }
         if (path === '/api/send-booking-email' && method === 'POST') {
           return await handleSendBookingEmail(request, env);
@@ -227,6 +231,91 @@ async function handleCreateCheckout(request, env) {
   }
 
   return apiResponse({ url: session.url, sessionId: session.id });
+}
+
+
+// ═════════════════════════════════════════════════════════════
+// POST /api/send-lead
+// Fired at Step 3 (contact capture) before payment.
+// Sends an internal-only "New Lead — Not Booked Yet" email.
+// Always returns success so the frontend is never blocked.
+// ═════════════════════════════════════════════════════════════
+async function handleSendLead(request, env) {
+  let body;
+  try { body = await request.json(); } catch { return apiResponse({ ok: true }); }
+
+  const emailApiKey = env.EMAIL_API_KEY;
+  const emailApiUrl = env.EMAIL_API_URL || 'https://api.resend.com/emails';
+  const emailFrom   = env.EMAIL_FROM   || 'SweepRight <bookings@sweeprightcleaning.com>';
+  const internalTo  = env.INTERNAL_EMAIL || CONFIG.contact.email;
+
+  if (!emailApiKey) {
+    // No key configured — still return ok so frontend isn't blocked
+    return apiResponse({ ok: true });
+  }
+
+  const ts = body.timestamp
+    ? new Date(body.timestamp).toLocaleString('en-GB', { timeZone: 'Europe/London' })
+    : new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' });
+
+  const sizeDesc = body.serviceCategory === 'home'
+    ? `${body.bedrooms || '?'} bed / ${body.bathrooms || '?'} bath`
+    : `${body.sqft || '?'} sq ft`;
+
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>New Lead</title></head>
+<body style="font-family:Arial,sans-serif;background:#F4FBF9;padding:32px 16px;margin:0">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08)">
+  <tr><td style="background:linear-gradient(135deg,#F59E0B,#D97706);padding:24px 32px">
+    <p style="margin:0;font-size:20px;font-weight:800;color:#fff">⚡ New Lead — Not Booked Yet</p>
+    <p style="margin:4px 0 0;font-size:13px;color:rgba(255,255,255,0.8)">Captured at Step 3 · ${ts}</p>
+  </td></tr>
+  <tr><td style="padding:28px 32px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #E5E7EB;border-radius:8px;overflow:hidden">
+      ${eRow('Name',    esc(body.customerName || '—'))}
+      ${eRow('Phone',   esc(body.phone        || '—'))}
+      ${eRow('Email',   esc(body.email        || '—'))}
+      ${eRow('Postcode',esc(body.postcode     || '—'))}
+      ${eRow('Service', cap(body.serviceCategory || '—') + ' — ' + cap(body.propertyType || '—'))}
+      ${eRow('Size',    sizeDesc)}
+    </table>
+    <p style="margin:20px 0 0;font-size:13px;color:#6B7280">This lead has NOT completed payment yet. Follow up promptly to convert.</p>
+  </td></tr>
+  <tr><td style="padding:16px 32px;background:#F9FAFB;text-align:center">
+    <p style="margin:0;font-size:11px;color:#9CA3AF">SweepRight Internal — Lead Notification</p>
+  </td></tr>
+</table>
+</body></html>`;
+
+  const text = [
+    '⚡ NEW LEAD — NOT BOOKED YET',
+    '═'.repeat(40),
+    `Captured: ${ts}`,
+    '',
+    `Name:     ${body.customerName || '—'}`,
+    `Phone:    ${body.phone        || '—'}`,
+    `Email:    ${body.email        || '—'}`,
+    `Postcode: ${body.postcode     || '—'}`,
+    `Service:  ${cap(body.serviceCategory || '—')} — ${cap(body.propertyType || '—')}`,
+    `Size:     ${sizeDesc}`,
+    '',
+    'This lead has NOT completed payment yet.',
+  ].join('\n');
+
+  try {
+    await dispatchEmail(emailApiUrl, emailApiKey, {
+      from:    emailFrom,
+      to:      internalTo,
+      subject: `New Lead — Not Booked Yet — ${body.customerName || 'Unknown'} (${body.postcode || '?'})`,
+      html,
+      text,
+    });
+  } catch (err) {
+    // Log but never surface to the client
+    console.error('Lead email failed:', err);
+  }
+
+  return apiResponse({ ok: true });
 }
 
 

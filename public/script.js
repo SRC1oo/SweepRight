@@ -33,7 +33,7 @@ const CONFIG = {
     { maxSqft: Infinity, recMin: 6,   recMax: 10,  recDefault: 8   },
   ],
   homeExtras: [
-    { id: 'oven',          emoji: '🍳', name: 'Inside Oven Clean',    mins: 40 },
+    { id: 'oven',          emoji: '🍳', name: 'Inside Oven Clean',    mins: 40, badge: 'Most popular' },
     { id: 'fridge',        emoji: '🧊', name: 'Fridge Clean',         mins: 20 },
     { id: 'pet-hair',      emoji: '🐾', name: 'Pet Hair Removal',     mins: 25 },
     { id: 'balcony',       emoji: '🌅', name: 'Balcony Clean',        mins: 25 },
@@ -53,7 +53,7 @@ const CONFIG = {
     { id: 'kitchen-breakroom', emoji: '☕', name: 'Kitchen / Breakroom Deep Clean', mins: 30 },
   ],
   sharedExtras: [
-    { id: 'deep-clean-addon',  emoji: '✨', name: 'Deep Clean Upgrade',             mins: 60 },
+    { id: 'deep-clean-addon',  emoji: '✨', name: 'Deep Clean Upgrade',             mins: 60, badge: 'Recommended for first visit' },
     { id: 'end-of-tenancy',    emoji: '📦', name: 'End of Tenancy Clean',           mins: 90 },
     { id: 'pre-inspection',    emoji: '🔍', name: 'Pre-inspection Clean',           mins: 45 },
   ],
@@ -85,13 +85,15 @@ const state = {
   timeWindow: 'morning',
   recurringStartDate: '',
   recurringDays: [],
-  // Step 6
+  // Step 3 (contact capture / lead)
   customerName: '',
   companyName: '',
   email: '',
   phone: '',
-  address: '',
   postcode: '',
+  leadEmailSent: false,
+  // Step 6 (schedule + address)
+  address: '',
   accessInstructions: '',
   // Calculated
   hourlyRate: 26,
@@ -206,11 +208,18 @@ function validateStep(step) {
     case 2:
       return true; // Size always has defaults
     case 3:
+      // Contact capture fields
+      if (!state.customerName.trim()) { showValidation('Please enter your full name.'); return false; }
+      if (!state.phone.trim()) { showValidation('Please enter your phone number.'); return false; }
+      if (!state.email.trim() || !state.email.includes('@')) { showValidation('Please enter a valid email address.'); return false; }
+      if (!state.postcode.trim()) { showValidation('Please enter your postcode.'); return false; }
+      return true;
+    case 4:
+      // Hours + frequency
       if (state.hours < CONFIG.minHours) {
         showValidation('Minimum booking is ' + CONFIG.minHours + ' hours.');
         return false;
       }
-      // Check if below recommendation and needs explanation
       if (state.hours < state.recMinHrs) {
         const explanation = document.getElementById('below-rec-explanation');
         if (explanation && !explanation.value.trim()) {
@@ -221,37 +230,119 @@ function validateStep(step) {
         state.belowRecExplanation = explanation ? explanation.value.trim() : '';
       }
       return true;
-    case 4:
-      return true; // Extras are optional
     case 5:
+      return true; // Extras are optional
+    case 6:
+      // Date + address
       if (!state.bookingDate) {
         showValidation('Please select a booking date.');
         return false;
       }
-      // Validate 48hr lead
       const selectedDate = new Date(state.bookingDate + 'T00:00:00');
       const minDate = getMinBookingDate();
       if (selectedDate < minDate) {
         showValidation('We require at least 48 hours\' notice. Please select a later date.');
         return false;
       }
-      // Recurring validation
       if (state.frequency !== 'one-off' && state.recurringDays.length === 0) {
         showValidation('Please select at least one preferred day for recurring bookings.');
         return false;
       }
-      return true;
-    case 6:
-      if (!state.customerName.trim()) { showValidation('Please enter your name.'); return false; }
-      if (!state.email.trim() || !state.email.includes('@')) { showValidation('Please enter a valid email address.'); return false; }
-      if (!state.phone.trim()) { showValidation('Please enter your phone number.'); return false; }
       if (!state.address.trim()) { showValidation('Please enter your address.'); return false; }
-      if (!state.postcode.trim()) { showValidation('Please enter your postcode.'); return false; }
       return true;
     case 7:
       return true;
   }
   return true;
+}
+
+// ── STEP 3: LEAD CAPTURE ──
+// Tab/Enter auto-advance between contact fields
+function advanceOnEnter(event, nextId) {
+  if (event.key === 'Enter' || event.key === 'Tab') {
+    const next = document.getElementById(nextId);
+    if (next) { event.preventDefault(); next.focus(); }
+  }
+}
+
+// Validates contact fields, shows inline confirmation, fires
+// a non-blocking lead email, then advances to step 4.
+function submitLeadAndContinue() {
+  if (!validateStep(3)) return;
+
+  // Show non-blocking confirmation banner briefly
+  const banner = document.getElementById('lead-confirm-banner');
+  if (banner) {
+    banner.style.display = 'flex';
+    // Keep it visible just long enough for the user to read it,
+    // then the step transition makes it naturally disappear
+  }
+
+  // Fire lead email in background — never block the user
+  if (!state.leadEmailSent) {
+    sendLeadEmail();
+    state.leadEmailSent = true;
+  }
+
+  // Short delay so user sees the confirmation before the view changes
+  setTimeout(() => {
+    state.step = 3;
+    goStep(4);
+  }, 800);
+}
+
+async function sendLeadEmail() {
+  try {
+    await fetch('/api/send-lead', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        customerName:    state.customerName,
+        phone:           state.phone,
+        email:           state.email,
+        postcode:        state.postcode,
+        serviceCategory: state.serviceCategory,
+        propertyType:    state.propertyType,
+        bedrooms:        state.bedrooms,
+        bathrooms:       state.bathrooms,
+        timestamp:       new Date().toISOString(),
+      }),
+    });
+  } catch (e) {
+    // Silent fail — never interrupt the user
+    console.warn('[SweepRight] Lead email failed:', e);
+  }
+}
+
+// ── WHATSAPP ──
+function buildWhatsAppUrl() {
+  const allExtras = [...CONFIG.homeExtras, ...CONFIG.commercialExtras, ...CONFIG.sharedExtras];
+  const selectedExtrasNames = Object.keys(state.selectedExtras)
+    .map(id => allExtras.find(e => e.id === id)?.name)
+    .filter(Boolean)
+    .join(', ') || 'None';
+
+  const lines = [
+    'Hi SweepRight! I\'d like to book a clean 👋',
+    '',
+    '📍 Postcode: ' + (state.postcode || '—'),
+    '🏠 Service: ' + (state.serviceCategory === 'home' ? 'Home' : 'Commercial') + ' — ' + getPropertyTypeName(),
+    '🛏️ Size: ' + (state.serviceCategory === 'home'
+      ? state.bedrooms + ' bed / ' + state.bathrooms + ' bath'
+      : state.sqft + ' sq ft'),
+    '⏱️ Hours: ' + state.hours + ' hrs',
+    '🔁 Frequency: ' + capitalize(state.frequency),
+    '✨ Extras: ' + selectedExtrasNames,
+    state.bookingDate ? '📅 Preferred date: ' + state.bookingDate : '',
+    state.customerName ? '👤 Name: ' + state.customerName : '',
+  ].filter(Boolean).join('\n');
+
+  return 'https://wa.me/447425583734?text=' + encodeURIComponent(lines);
+}
+
+function updateWhatsAppLink() {
+  const btn = document.getElementById('whatsapp-summary-btn');
+  if (btn) btn.href = buildWhatsAppUrl();
 }
 
 function showValidation(msg) {
@@ -407,8 +498,14 @@ function renderRecommendation() {
   const bar = document.getElementById('rec-bar');
   if (!bar) return;
   bar.innerHTML =
-    '<div class="rec-icon">💡</div>' +
-    '<div class="rec-text"><strong>Recommended:</strong> ' + state.recMinHrs + '–' + state.recMaxHrs + ' hours for this property size</div>';
+    '<div class="rec-icon">⭐</div>' +
+    '<div class="rec-text">' +
+      '<strong class="rec-strong">' + state.recMinHrs + '–' + state.recMaxHrs + ' hours</strong> ' +
+      '— We strongly recommend this time for a full clean of this property.' +
+    '</div>';
+  // Also update the below-rec min display
+  const minEl = document.getElementById('rec-min-display');
+  if (minEl) minEl.textContent = state.recMinHrs;
 }
 
 // ── STEP 3: HOURS + FREQUENCY ──
@@ -444,45 +541,43 @@ function selectFrequency(freq) {
 }
 
 // ── STEP 4: EXTRAS ──
+// Helper: build a single extra card HTML, with optional badge
+function buildExtraCard(ex, rate, isSelected) {
+  const cost    = Math.round((ex.mins / 60) * rate * 100) / 100;
+  const sel     = isSelected ? ' selected' : '';
+  const badgeHtml = ex.badge
+    ? '<span class="extra-badge">' + ex.badge + '</span>'
+    : '';
+  return '<div class="extra-opt' + sel + '" onclick="toggleExtra(\'' + ex.id + '\',' + ex.mins + ')" data-extra="' + ex.id + '">' +
+    '<div class="extra-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>' +
+    '<div class="extra-emoji">' + ex.emoji + '</div>' +
+    '<div class="extra-details">' +
+      '<div class="extra-name-row">' +
+        '<span class="extra-name">' + ex.name + '</span>' +
+        badgeHtml +
+      '</div>' +
+      '<div class="extra-meta">+' + ex.mins + ' mins · +£' + cost.toFixed(2) + '</div>' +
+    '</div>' +
+  '</div>';
+}
+
 function renderExtrasGrid() {
   const container = document.getElementById('extras-grid');
   if (!container) return;
-  const isHome = state.serviceCategory === 'home';
+  const isHome   = state.serviceCategory === 'home';
   const isAirbnb = state.propertyType === 'airbnb';
-  // Airbnb uses home extras
-  const extras = (isHome || isAirbnb) ? CONFIG.homeExtras : CONFIG.commercialExtras;
-  const shared = CONFIG.sharedExtras;
+  const extras   = (isHome || isAirbnb) ? CONFIG.homeExtras : CONFIG.commercialExtras;
+  const shared   = CONFIG.sharedExtras;
+  const rate     = (isHome || isAirbnb) ? CONFIG.rates.home : CONFIG.rates.commercial;
+
   let html = '<div class="extras-section-label">Service Extras</div><div class="extras-options">';
-  extras.forEach(ex => {
-    const rate = isHome || isAirbnb ? CONFIG.rates.home : CONFIG.rates.commercial;
-    const cost = Math.round((ex.mins / 60) * rate * 100) / 100;
-    const selected = state.selectedExtras[ex.id] ? ' selected' : '';
-    html += '<div class="extra-opt' + selected + '" onclick="toggleExtra(\'' + ex.id + '\',' + ex.mins + ')" data-extra="' + ex.id + '">' +
-      '<div class="extra-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>' +
-      '<div class="extra-emoji">' + ex.emoji + '</div>' +
-      '<div class="extra-details">' +
-        '<div class="extra-name">' + ex.name + '</div>' +
-        '<div class="extra-meta">+' + ex.mins + ' mins · +£' + cost.toFixed(2) + '</div>' +
-      '</div>' +
-    '</div>';
-  });
+  extras.forEach(ex => { html += buildExtraCard(ex, rate, !!state.selectedExtras[ex.id]); });
   html += '</div>';
-  // Shared extras
+
   html += '<div class="extras-section-label" style="margin-top:24px">Additional Options</div><div class="extras-options">';
-  shared.forEach(ex => {
-    const rate = isHome || isAirbnb ? CONFIG.rates.home : CONFIG.rates.commercial;
-    const cost = Math.round((ex.mins / 60) * rate * 100) / 100;
-    const selected = state.selectedExtras[ex.id] ? ' selected' : '';
-    html += '<div class="extra-opt' + selected + '" onclick="toggleExtra(\'' + ex.id + '\',' + ex.mins + ')" data-extra="' + ex.id + '">' +
-      '<div class="extra-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>' +
-      '<div class="extra-emoji">' + ex.emoji + '</div>' +
-      '<div class="extra-details">' +
-        '<div class="extra-name">' + ex.name + '</div>' +
-        '<div class="extra-meta">+' + ex.mins + ' mins · +£' + cost.toFixed(2) + '</div>' +
-      '</div>' +
-    '</div>';
-  });
+  shared.forEach(ex => { html += buildExtraCard(ex, rate, !!state.selectedExtras[ex.id]); });
   html += '</div>';
+
   container.innerHTML = html;
 }
 
@@ -609,12 +704,38 @@ function updateSummary() {
   // Per visit note
   const perVisitEl = document.getElementById('sum-per-visit');
   if (perVisitEl) perVisitEl.textContent = state.frequency === 'one-off' ? 'One-off clean' : 'Per visit · ' + capitalize(state.frequency);
+
+  // Keep WhatsApp link fresh
+  updateWhatsAppLink();
 }
 
 // ── STEP 7: REVIEW + PAY ──
 function renderReview() {
   const container = document.getElementById('review-content');
   if (!container) return;
+
+  // Always recalculate before rendering so prices are never stale / £0
+  recalculate();
+
+  // Update Pay Now button amount
+  const payAmountEl = document.getElementById('pay-amount');
+  if (payAmountEl) payAmountEl.textContent = '£' + state.finalTotal.toFixed(2);
+
+  // Populate the pre-pay summary bar
+  const paySummaryTotal = document.getElementById('pay-summary-total');
+  if (paySummaryTotal) paySummaryTotal.textContent = '£' + state.finalTotal.toFixed(2);
+
+  const paySummaryBreakdown = document.getElementById('pay-summary-breakdown');
+  if (paySummaryBreakdown) {
+    const allExtras = [...CONFIG.homeExtras, ...CONFIG.commercialExtras, ...CONFIG.sharedExtras];
+    const selExtrasNames = Object.keys(state.selectedExtras)
+      .map(id => allExtras.find(e => e.id === id)?.name).filter(Boolean).join(', ');
+    let bLines = '<span>' + state.totalHours.toFixed(1) + ' hrs × £' + state.hourlyRate + '/hr</span>';
+    if (selExtrasNames) bLines += '<span>Extras: ' + selExtrasNames + '</span>';
+    if (state.discountPct > 0) bLines += '<span class="breakdown-discount">' + capitalize(state.frequency) + ' discount −' + state.discountPct + '%</span>';
+    paySummaryBreakdown.innerHTML = bLines;
+  }
+
   const allExtras = [...CONFIG.homeExtras, ...CONFIG.commercialExtras, ...CONFIG.sharedExtras];
   const selectedExtras = Object.keys(state.selectedExtras).map(id => allExtras.find(e => e.id === id)).filter(Boolean);
 
